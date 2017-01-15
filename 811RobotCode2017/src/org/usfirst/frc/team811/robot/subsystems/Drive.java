@@ -30,7 +30,7 @@ public class Drive extends Subsystem implements Config {
     double inputX;
     double inputS;
 
-	public void driveWithJoy {
+	public void driveWithJoy() {
 	    	
 	    	boolean strafe = false;
 	    	double correction = 0;
