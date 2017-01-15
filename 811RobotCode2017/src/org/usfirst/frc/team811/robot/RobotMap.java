@@ -1,18 +1,51 @@
 package org.usfirst.frc.team811.robot;
+
+import com.kauailabs.navx.frc.AHRS;
+
+import edu.wpi.first.wpilibj.AnalogGyro;
+import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.RobotDrive;
+import edu.wpi.first.wpilibj.SPI;
+import edu.wpi.first.wpilibj.SpeedController;
+import edu.wpi.first.wpilibj.Talon;
+import edu.wpi.first.wpilibj.interfaces.Gyro;
+
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
  * to a variable name. This provides flexibility changing wiring, makes checking
  * the wiring easier and significantly reduces the number of magic numbers
  * floating around.
  */
-public class RobotMap {
-    // For example to map the left and right motors, you could define the
-    // following variables to use with your drivetrain subsystem.
-    // public static int leftMotor = 1;
-    // public static int rightMotor = 2;
+public class RobotMap implements Config {
     
-    // If you are using multiple modules, make sure to define both the port
-    // number and the module. For example you with a rangefinder:
-    // public static int rangefinderPort = 1;
-    // public static int rangefinderModule = 1;
+	// Objects
+	public static Joystick joystick1;
+	public static Joystick joystick2;
+	
+	public static SpeedController drivefrontright;
+    public static SpeedController drivefrontleft;
+    public static SpeedController drivebackleft;
+    public static SpeedController drivebackright;
+    public static Encoder driveEncoder;
+    public static RobotDrive driveTrain;
+    public static AnalogGyro driveGyro;
+    public static AHRS ahrs;
+
+    public void init() {
+    	joystick1 = new Joystick(1);
+        joystick2 = new Joystick(2);
+    	
+    	drivefrontright = new Talon(FRONT_RIGHT_PORT);
+        drivefrontleft = new Talon(FRONT_LEFT_PORT);
+        drivebackleft = new Talon(REAR_LEFT_PORT);
+        drivebackright = new Talon(REAR_RIGHT_PORT);
+        driveTrain = new RobotDrive(drivefrontleft, drivebackleft,
+                drivefrontright, drivebackright);
+        driveEncoder = new Encoder(DRIVE_ENCODER_PORT_1, DRIVE_ENCODER_PORT_2);
+        driveEncoder.setReverseDirection(false);
+        driveEncoder.setDistancePerPulse(DRIVE_DISTANCE_PER_PULSE);
+        ahrs = new AHRS(SPI.Port.kMXP);
+    }
+    
 }
