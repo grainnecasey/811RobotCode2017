@@ -26,6 +26,13 @@ public interface Config {
     int ENCODER_RESET_BUTTON = 3;
     int GYRO_RESET_BUTTON = 4;
     
+    //i dunno where to put this
+    int INTAKE_BALL_BUTTON = 5;
+    int INTAKE_GEAR_BUTTON = 9;
+    int HIGHSHOOTER_BUTTON = 6;
+    int	CLIMBER_BUTTON = 1;
+    int TURRET_BUTTON = 2;
+    
     // Variables
     double DRIVE_DISTANCE_PER_PULSE = 1/9.5;
 }

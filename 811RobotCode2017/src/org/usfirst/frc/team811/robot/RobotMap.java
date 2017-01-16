@@ -27,6 +27,11 @@ public class RobotMap implements Config {
     public static SpeedController drivefrontleft;
     public static SpeedController drivebackleft;
     public static SpeedController drivebackright;
+    public static SpeedController intakeball;
+    public static SpeedController intakegear;
+    public static SpeedController highshooter;
+    public static SpeedController climber;
+    public static SpeedController turret;
     public static Encoder driveEncoder;
     public static RobotDrive driveTrain;
     public static AnalogGyro driveGyro;
@@ -35,17 +40,20 @@ public class RobotMap implements Config {
     public void init() {
     	joystick1 = new Joystick(1);
         joystick2 = new Joystick(2);
-    	
     	drivefrontright = new Talon(FRONT_RIGHT_PORT);
         drivefrontleft = new Talon(FRONT_LEFT_PORT);
         drivebackleft = new Talon(REAR_LEFT_PORT);
         drivebackright = new Talon(REAR_RIGHT_PORT);
-        driveTrain = new RobotDrive(drivefrontleft, drivebackleft,
-                drivefrontright, drivebackright);
+        driveTrain = new RobotDrive(drivefrontleft, drivebackleft, drivefrontright, drivebackright);
         driveEncoder = new Encoder(DRIVE_ENCODER_PORT_1, DRIVE_ENCODER_PORT_2);
         driveEncoder.setReverseDirection(false);
         driveEncoder.setDistancePerPulse(DRIVE_DISTANCE_PER_PULSE);
         ahrs = new AHRS(SPI.Port.kMXP);
+        climber = new Talon(CLIMBER_BUTTON);
+        turret = new Talon(TURRET_BUTTON);
+        intakeball = new Talon(INTAKE_BALL_BUTTON);
+        intakegear =new Talon(INTAKE_GEAR_BUTTON);
+        highshooter = new Talon(HIGHSHOOTER_BUTTON);
     }
     
 }
