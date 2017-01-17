@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.interfaces.Gyro;
+import edu.wpi.first.wpilibj.networktables.NetworkTable;
 
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
@@ -29,10 +30,12 @@ public class RobotMap implements Config {
     public static SpeedController drivebackright;
     public static SpeedController intakeball;
     public static SpeedController intakegear;
-    public static SpeedController highshooter;
+    public static SpeedController shootertalon1;
     public static SpeedController climber;
     public static SpeedController turret;
+    public static NetworkTable visionTable;
     public static Encoder driveEncoder;
+    public static Encoder shooterEncoder;
     public static RobotDrive driveTrain;
     public static AnalogGyro driveGyro;
     public static AHRS ahrs;
@@ -53,7 +56,9 @@ public class RobotMap implements Config {
         turret = new Talon(TURRET_BUTTON);
         intakeball = new Talon(INTAKE_BALL_BUTTON);
         intakegear =new Talon(INTAKE_GEAR_BUTTON);
-        highshooter = new Talon(HIGHSHOOTER_BUTTON);
+        shootertalon1 = new Talon(SHOOTER_BUTTON);
+        shooterEncoder = new Encoder(SHOOTER_ENCODER_PORT_1, DRIVE_ENCODER_PORT_2);
+        visionTable = NetworkTable.getTable("GRIP/811Contour");
     }
     
 }

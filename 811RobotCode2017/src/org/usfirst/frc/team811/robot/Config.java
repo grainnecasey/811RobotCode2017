@@ -29,9 +29,17 @@ public interface Config {
     //i dunno where to put this
     int INTAKE_BALL_BUTTON = 5;
     int INTAKE_GEAR_BUTTON = 9;
-    int HIGHSHOOTER_BUTTON = 6;
+    int SHOOTER_BUTTON = 6;
     int	CLIMBER_BUTTON = 1;
     int TURRET_BUTTON = 2;
+    
+    int SHOOTER_ENCODER_PORT_1 = 0;
+	int SHOOTER_ENCODER_PORT_2 = 1;
+	
+	double SHOOTER_FULL_SPEED_RATE = 20; //TODO
+	double SHOOTER_DISTANCE_PER_PULSE = 260; 	//TODO
+	int SHOOTER_SPEED = 1;	//TODO
+	double SHOOTER_END_WAIT_TIME = 50;	//TODO
     
     // Variables
     double DRIVE_DISTANCE_PER_PULSE = 1/9.5;
