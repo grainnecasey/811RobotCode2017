@@ -26,12 +26,19 @@ public interface Config {
     int ENCODER_RESET_BUTTON = 3;
     int GYRO_RESET_BUTTON = 4;
     
-    //i dunno where to put this
+    //intake control & Port
     int INTAKE_BALL_BUTTON = 5;
     int INTAKE_GEAR_BUTTON = 9;
+	int INTAKE_TALON_PORT = 0;
+	int INTAKE_SPEED = 1;
+	int INTAKE_IN_BUTTON = 1;	//a
+	int INTAKE_OUT_BUTTON = 2;
+	
+    //i dunno where to put this
     int SHOOTER_BUTTON = 6;
     int	CLIMBER_BUTTON = 1;
     int TURRET_BUTTON = 2;
+    
     
     int SHOOTER_ENCODER_PORT_1 = 0;
 	int SHOOTER_ENCODER_PORT_2 = 1;

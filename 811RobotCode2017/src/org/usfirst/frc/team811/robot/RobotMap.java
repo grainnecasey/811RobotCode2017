@@ -3,6 +3,7 @@ package org.usfirst.frc.team811.robot;
 import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.AnalogGyro;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.RobotDrive;
@@ -33,6 +34,8 @@ public class RobotMap implements Config {
     public static SpeedController shootertalon1;
     public static SpeedController climber;
     public static SpeedController turret;
+    public static SpeedController intakeTalon;
+    public static DigitalInput intakeLimit;
     public static NetworkTable visionTable;
     public static Encoder driveEncoder;
     public static Encoder shooterEncoder;
