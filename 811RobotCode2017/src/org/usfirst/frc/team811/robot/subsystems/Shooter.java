@@ -3,8 +3,9 @@ package org.usfirst.frc.team811.robot.subsystems;
 import org.usfirst.frc.team811.robot.Config;
 import org.usfirst.frc.team811.robot.RobotMap;
 
+import com.ctre.CANTalon;
+
 import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -17,9 +18,8 @@ public class Shooter extends Subsystem implements Config {
 	
 	Joystick joy2 = RobotMap.joystick2;
 	
-	SpeedController shooterTalon1 = RobotMap.shootertalon1;
-	//SpeedController shooterTalon2 = RobotMap.shooterTalon2;
-	Encoder shooterEncoder = RobotMap.shooterEncoder;
+	CANTalon shooterTalon1 = RobotMap.shootertalon1;
+	CANTalon shooterTalon2 = RobotMap.shootertalon2;
 	NetworkTable visionTable = RobotMap.visionTable;
 	
 
@@ -47,10 +47,10 @@ public class Shooter extends Subsystem implements Config {
     
     public boolean isFullSpeed() {
     	
-    	shooterEncoder.setDistancePerPulse(SHOOTER_DISTANCE_PER_PULSE);
+    	shooterTalon1.configEncoderCodesPerRev(SHOOTER_DISTANCE_PER_PULSE);
     	//1 revolution = about 260 
     	
-    	return shooterEncoder.getRate() >= SHOOTER_FULL_SPEED_RATE;
+    	return shooterTalon1.getEncVelocity() + shooterTalon2.getEncVelocity() >= (SHOOTER_FULL_SPEED_RATE * 2);
     	
     	//return (shootingTime + SHOOTER_WAIT_TIME > System.currentTimeMillis()) && !(shootingEndTime + SHOOTER_END_WAIT_TIME > System.currentTimeMillis());
     }
@@ -59,6 +59,7 @@ public class Shooter extends Subsystem implements Config {
     	
     	shootingTime = System.currentTimeMillis();
     	shooterTalon1.set(SHOOTER_SPEED);
+    	shooterTalon2.set(SHOOTER_SPEED);
     	
     	//while (shootingTime + 3000 > System.currentTimeMillis()) {
     		
@@ -101,6 +102,7 @@ public class Shooter extends Subsystem implements Config {
     	SmartDashboard.putNumber("speedScale", speedScale);
     	
     	shooterTalon1.set(speedScale);
+    	shooterTalon2.set(speedScale);
     	//shooterTalon2.set(-speedScale);
     	
     	//if (!intakeLimit.get()) {
@@ -109,6 +111,7 @@ public class Shooter extends Subsystem implements Config {
     	
     	if (shot()) {
     		shooterTalon1.set(0);
+    		shooterTalon2.set(0);
     		//shooterTalon2.set(0);
     	}
     	
@@ -116,6 +119,7 @@ public class Shooter extends Subsystem implements Config {
     
     public void stopShooter() {
     	shooterTalon1.set(0);
+    	shooterTalon2.set(0);
     	//shooterTalon2.set(0);
     }
     

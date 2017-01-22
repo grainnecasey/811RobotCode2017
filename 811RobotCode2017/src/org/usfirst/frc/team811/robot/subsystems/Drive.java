@@ -5,7 +5,6 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.interfaces.Gyro;
 
 import org.usfirst.frc.team811.robot.*;
 import org.usfirst.frc.team811.robot.commands.drive_w_joystick;
@@ -23,7 +22,6 @@ public class Drive extends Subsystem implements Config {
     SpeedController backright = RobotMap.drivebackright;
     Joystick joystick1 = RobotMap.joystick1;
     RobotDrive driveTrain = RobotMap.driveTrain;
-    Encoder driveEncoder = RobotMap.driveEncoder;
     AHRS ahrs = RobotMap.ahrs;
     double speedScale = 1;
     double inputY;
@@ -39,6 +37,7 @@ public class Drive extends Subsystem implements Config {
 	    		strafe = true;
 	    		correction = 0;
 	    	}
+	    	
 	    	if ((Math.abs(joystick1.getRawAxis(DRIVE_STRAFING_RIGHT_JOYSTICK_AXIS)) >=0.3 || Math.abs(joystick1.getRawAxis(DRIVE_STRAFING_LEFT_JOYSTICK_AXIS)) >= 0.3) && strafe ) {
 	    		//gyro1.getAngle();
 	    		ahrs.reset();
