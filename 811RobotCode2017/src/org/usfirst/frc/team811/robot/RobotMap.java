@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.SPI;
+import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
 
 /**
@@ -41,6 +42,7 @@ public class RobotMap implements Config {
     public static Relay turretLoader;
     public static Relay gearGrabber;
     public static Relay climber;
+
 
     public void init() {
     	joystick1 = new Joystick(1);
