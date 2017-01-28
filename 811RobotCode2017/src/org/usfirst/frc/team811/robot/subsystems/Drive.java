@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import org.usfirst.frc.team811.robot.*;
 import org.usfirst.frc.team811.robot.commands.drive_w_joystick;
 
+import com.ctre.CANTalon;
 import com.kauailabs.navx.frc.AHRS;
 
 /**
@@ -16,10 +17,10 @@ import com.kauailabs.navx.frc.AHRS;
  */
 public class Drive extends Subsystem implements Config {
     
-    SpeedController frontright = RobotMap.drivefrontright;
-    SpeedController frontleft = RobotMap.drivefrontleft;
-    SpeedController backleft = RobotMap.drivebackleft;
-    SpeedController backright = RobotMap.drivebackright;
+    CANTalon frontright = RobotMap.drivefrontright;
+    CANTalon frontleft = RobotMap.drivefrontleft;
+    CANTalon backleft = RobotMap.drivebackleft;
+    CANTalon backright = RobotMap.drivebackright;
     Joystick joystick1 = RobotMap.joystick1;
     RobotDrive driveTrain = RobotMap.driveTrain;
     AHRS ahrs = RobotMap.ahrs;

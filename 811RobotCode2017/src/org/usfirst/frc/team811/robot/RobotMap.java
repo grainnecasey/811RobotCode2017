@@ -27,21 +27,22 @@ public class RobotMap implements Config {
     public static CANTalon drivefrontleft;
     public static CANTalon drivebackleft;
     public static CANTalon drivebackright;
-    public static CANTalon intakeball;
-    public static CANTalon intakegear;
     public static CANTalon shootertalon1;
     public static CANTalon shootertalon2;
     public static CANTalon turret;
     public static CANTalon intakeTalon;
+    
+    public static Relay intakeBall;
+    public static Relay turretLoader;
+    public static Relay intakeGear;
+    public static Relay climber;
+    
     public static DigitalInput intakeLimit;
     public static NetworkTable visionTable;
     public static RobotDrive driveTrain;
     public static AnalogGyro driveGyro;
     public static AHRS ahrs;
-    public static Relay turretLoader;
-    public static Relay gearGrabber;
-    public static Relay climber;
-
+    
     public void init() {
     	joystick1 = new Joystick(1);
         joystick2 = new Joystick(2);
@@ -53,13 +54,13 @@ public class RobotMap implements Config {
         driveTrain = new RobotDrive(drivefrontleft, drivebackleft, drivefrontright, drivebackright);
         ahrs = new AHRS(SPI.Port.kMXP);
         turret = new CANTalon(TURRET_PORT);
-        intakeball = new CANTalon(INTAKE_BALL_PORT);
-        intakegear = new CANTalon(INTAKE_GEAR_PORT);
+        intakeBall = new Relay(INTAKE_BALL_PORT);
+        intakeGear = new Relay(INTAKE_GEAR_PORT);
         shootertalon1 = new CANTalon(RIGHT_SHOOTER_PORT);
         shootertalon2 = new CANTalon(LEFT_SHOOTER_PORT);
         turretLoader = new Relay(LOADER_RELAY_PORT);
         climber = new Relay(CLIMBER_BUTTON);
-        gearGrabber = new Relay(GEARGRABBER_PORT);
+        intakeGear = new Relay(GEARGRABBER_PORT);
         visionTable = NetworkTable.getTable("GRIP/811Contour");
     }
     

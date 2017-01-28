@@ -37,7 +37,7 @@ public class Shooter extends Subsystem implements Config {
         //setDefaultCommand(new MySpecialCommand());
     }
     
-    public void shootWJoy() {
+    public void shootWithJoy() {
     	
     	if (joy2.getRawButton(SHOOTER_BUTTON)) {
     		shoot();

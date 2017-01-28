@@ -5,6 +5,8 @@ import org.usfirst.frc.team811.robot.Robot;
 import org.usfirst.frc.team811.robot.RobotMap;
 import org.usfirst.frc.team811.robot.subsystems.Shooter;
 
+import com.ctre.CANTalon;
+
 import edu.wpi.first.wpilibj.Joystick;
 	import edu.wpi.first.wpilibj.command.Subsystem;
 	import edu.wpi.first.wpilibj.*;
@@ -14,11 +16,7 @@ import edu.wpi.first.wpilibj.Joystick;
 		
 		Joystick joy2 = RobotMap.joystick2;
 		
-		SpeedController intakeTalon = RobotMap.intakeball;
-		//DigitalInput intakeLimit = RobotMap.intakeLimit;
-	    
-	    // Put methods for controlling this subsystem
-	    // here. Call these from Commands.
+		Relay intakeBall = RobotMap.intakeBall;
 
 	    public void initDefaultCommand() {
 	        // Set the default command for a subsystem here.
@@ -28,34 +26,12 @@ import edu.wpi.first.wpilibj.Joystick;
 	    public void intakeJoyControl() {
 	    	
 	    	if (joy2.getRawButton(INTAKE_IN_BUTTON)) {
-	    		//if (!intakeLimit.get()) {
-	    		if (!IntakeBall.get()) {
-	    			intakeTalon.set(INTAKE_SPEED);} 
-	    		else {
-	    			if (Robot.shooter.isFullSpeed()) {
-	    				intakeTalon.set(INTAKE_SPEED);
-	    			}
-	    		}
+	    		intakeBall.set(Relay.Value.kOn);
 	    	} 
 	    		else if (joy2.getRawButton(INTAKE_OUT_BUTTON)) {
-	    		//if (intakeLimit.get() && !Robot.shooter.isFullSpeed()) {
-	    		if (!IntakeBall.get() && !Robot.shooter.isFullSpeed()) {
-	    			intakeTalon.set(-INTAKE_SPEED);
-	    		}
+	    		intakeBall.set(Relay.Value.kOff);
 	    	} 
-	    }
-
-	    //Methods .isFullSpeed and .get need to have the Shooter.java subsystem
-	    public void intake() {
-	    	intakeTalon.set(INTAKE_SPEED);
-	    }
-	    
-	    public void stopIntake() {
-	    	intakeTalon.set(0);
-	    }
-	    
-	    public void intakeBack() {
-	    	intakeTalon.set(-INTAKE_SPEED);
+	    	
 	    }
 	}
 
