@@ -15,7 +15,7 @@ import edu.wpi.first.wpilibj.Joystick;
 	public class IntakeBall extends Subsystem implements Config {
 		
 		Joystick joy2 = RobotMap.joystick2;
-		
+		CANTalon intakeTalon = RobotMap.intakeTalon;
 		Relay intakeBall = RobotMap.intakeBall;
 
 	    public void initDefaultCommand() {
@@ -33,6 +33,21 @@ import edu.wpi.first.wpilibj.Joystick;
 	    	} 
 	    	
 	    }
+	    
+	    public void intake() 
+	    {
+	    	intakeTalon.set(INTAKE_SPEED);
+	    }
+	    
+	    public void intakeStop()
+	    {
+	    	intakeTalon.set(0);	    	
+	    }
+	    public void intakeBack()
+	    {
+	    	intakeTalon.set(-INTAKE_SPEED);
+	    }
+	    
 	}
 
 

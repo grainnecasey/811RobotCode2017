@@ -31,6 +31,7 @@ public interface Config {
     int INTAKE_GEAR_BUTTON = 9;
 	int INTAKE_IN_BUTTON = 1; //a
 	int INTAKE_OUT_BUTTON = 2; // 
+	int INTAKE_SPEED =1; 
 	
     // Shooter/Turret Controls
     int SHOOTER_BUTTON = 6;
