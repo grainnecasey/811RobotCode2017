@@ -6,6 +6,9 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+
+import org.usfirst.frc.team811.robot.subsystems.Agitator;
+import org.usfirst.frc.team811.robot.subsystems.Climber;
 import org.usfirst.frc.team811.robot.subsystems.Drive;
 import org.usfirst.frc.team811.robot.subsystems.IntakeBall;
 import org.usfirst.frc.team811.robot.subsystems.Shooter;
@@ -27,6 +30,8 @@ public class Robot extends IterativeRobot {
 	public static OI oi;
 	public static Shooter shooter;
 	public static IntakeBall intake;
+	public static Climber climber;
+	public static Agitator agitator;
 	
     Command autonomousCommand;
     SendableChooser chooser;
@@ -40,6 +45,8 @@ public class Robot extends IterativeRobot {
 		shooter = new Shooter();
 		drive = new Drive();
 		intake = new IntakeBall();
+		climber = new Climber();
+		agitator = new Agitator();
         chooser = new SendableChooser();
 //        chooser.addObject("My Auto", new MyAutoCommand());
         SmartDashboard.putData("Auto mode", chooser);

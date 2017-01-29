@@ -32,6 +32,7 @@ public class RobotMap implements Config {
     public static CANTalon shootertalon2;
     public static CANTalon turret;
     public static CANTalon intakeTalon;
+    public static CANTalon agitator;
     
     public static Relay intakeBall;
     public static Relay turretLoader;
@@ -63,6 +64,7 @@ public class RobotMap implements Config {
         climber = new Relay(CLIMBER_BUTTON);
         intakeGear = new Relay(GEARGRABBER_PORT);
         visionTable = NetworkTable.getTable("GRIP/811Contour");
+        agitator = new CANTalon(AGITATOR_PORT;)
     }
     
 }

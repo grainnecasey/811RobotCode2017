@@ -16,6 +16,7 @@ public interface Config {
     int LEFT_SHOOTER_PORT = 1;
     int LOADER_RELAY_PORT = 1;
     int GEARGRABBER_PORT = 1;
+    int AGITATOR_PORT = 1;
 	
     // Drive Controls
     int DRIVE_X_JOYSTICK_AXIS = 4;
@@ -43,5 +44,8 @@ public interface Config {
 	int SHOOTER_DISTANCE_PER_PULSE = 260;
 	int SHOOTER_SPEED = 1;
 	double SHOOTER_END_WAIT_TIME = 50;
+	
+	//Other Config
+	double AGITATOR_SPEED = .5;
     
 }
