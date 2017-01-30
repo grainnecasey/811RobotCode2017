@@ -1,5 +1,10 @@
 package org.usfirst.frc.team811.robot;
 
+import org.usfirst.frc.team811.robot.commands.climb_down;
+import org.usfirst.frc.team811.robot.commands.climb_up;
+import org.usfirst.frc.team811.robot.commands.intake_on;
+import org.usfirst.frc.team811.robot.commands.intake_off;
+
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
@@ -37,9 +42,21 @@ public class OI  implements Config{
 	JoystickButton intake_off;
 	JoystickButton climb;
 	JoystickButton vision_shoot;
-	JoystickButton 
+	JoystickButton gear_pick_up_up;
+	JoystickButton gear_pick_up_down;
 	
 	public OI() {
+		
+		//Operator Controller (joystick 2)
+		intake_in = new JoystickButton(RobotMap.joystick2, 1);
+		intake_in.whenPressed(new intake_on());
+		
+		intake_off = new JoystickButton(RobotMap.joystick2, 2);
+		intake_off.whenPressed(new intake_off());
+		
+		climb = new JoystickButton(RobotMap.joystick2, 3);
+		climb.whileHeld(new climb_up());
+		
 		
 	}
     

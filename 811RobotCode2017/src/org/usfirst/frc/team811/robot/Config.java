@@ -16,6 +16,8 @@ public interface Config {
     int LEFT_SHOOTER_PORT = 1;
     int LOADER_RELAY_PORT = 1;
     int GEARGRABBER_PORT = 1;
+    int GEAR_TOP_LIMIT_PORT = 2;
+    int GEAR_BOTTOM_LIMIT_PORT = 3;
     int AGITATOR_PORT = 1;
 	
     // Drive Controls

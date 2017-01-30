@@ -1,14 +1,18 @@
 package org.usfirst.frc.team811.robot.commands;
+
 import org.usfirst.frc.team811.robot.Robot;
-import org.usfirst.frc.team811.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class intake_off extends Command {
-	
-    public void intake_stop() {
+/**
+ *
+ */
+public class gear_joy_control extends Command {
+
+    public gear_joy_control() {
         // Use requires() here to declare subsystem dependencies
-    	requires(Robot.intake);
+        // eg. requires(chassis);
+    	requires(Robot.geargrabber);
     }
 
     // Called just before this Command runs the first time
@@ -17,12 +21,12 @@ public class intake_off extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.intake.intakeStop();
+    	Robot.geargrabber.gearJoyControl();
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return (RobotMap.intakeTalon.get() == 0);
+        return false;
     }
 
     // Called once after isFinished returns true
@@ -33,5 +37,4 @@ public class intake_off extends Command {
     // subsystems is scheduled to run
     protected void interrupted() {
     }
-
 }
