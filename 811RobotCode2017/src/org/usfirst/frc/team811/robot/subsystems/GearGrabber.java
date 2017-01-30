@@ -15,6 +15,7 @@ public class GearGrabber extends Subsystem {
 
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
+	//ERIC U WEENIE THIS IS EXACTLY WHAT I DID AND YOU SAID IT WAS WRONG! feelsbadman
 
 	Relay gearIntake = RobotMap.intakeGear;
 	DigitalInput gearTopLimit = RobotMap.gearTopLimit;
