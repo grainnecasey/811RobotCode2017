@@ -11,14 +11,14 @@ public interface Config {
     // Other Ports
     int TURRET_PORT = 1;
     int INTAKE_BALL_PORT = 1;
-    int INTAKE_GEAR_PORT = 1;
+    int GEAR_GRABBER_PORT = 1;
     int RIGHT_SHOOTER_PORT = 1;
     int LEFT_SHOOTER_PORT = 1;
     int LOADER_RELAY_PORT = 1;
-    int GEARGRABBER_PORT = 1;
     int GEAR_TOP_LIMIT_PORT = 2;
     int GEAR_BOTTOM_LIMIT_PORT = 3;
     int AGITATOR_PORT = 1;
+    int CLIMBER_PORT = 1;
 	
     // Drive Controls
     int DRIVE_X_JOYSTICK_AXIS = 4;
@@ -29,12 +29,13 @@ public interface Config {
     // Drive Config
     double DRIVE_DISTANCE_PER_PULSE = 1/9.5;
     
-    // Intake Controls
-    int INTAKE_BALL_BUTTON = 5;
-    int INTAKE_GEAR_BUTTON = 9;
-	int INTAKE_IN_BUTTON = 1; //a
-	int INTAKE_OUT_BUTTON = 2; // 
-	int INTAKE_SPEED =1; 
+    // Intake Ball Controls
+	int INTAKE_BALL_BUTTON = 1;
+	int INTAKE_SPEED = 1; 
+	
+	// Gear Grabber Control
+	int GEAR_GRABBER_UP_BUTTON = 1;
+	int GEAR_GRABBER_DOWN_BUTTON = 1;
 	
     // Shooter/Turret Controls
     int SHOOTER_BUTTON = 6;
@@ -49,5 +50,6 @@ public interface Config {
 	
 	//Other Config
 	double AGITATOR_SPEED = .5;
+	double CLIMBER_SPEED = 1;
     
 }

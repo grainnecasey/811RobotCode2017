@@ -33,11 +33,11 @@ public class RobotMap implements Config {
     public static CANTalon turret;
     public static CANTalon intakeTalon;
     public static CANTalon agitator;
+    public static CANTalon climber;
     
     public static Relay intakeBall;
     public static Relay turretLoader;
-    public static Relay intakeGear;
-    public static Relay climber;
+    public static Relay gearGrabber;
     
     public static DigitalInput gearTopLimit;
     public static DigitalInput gearBottomLimit;
@@ -58,13 +58,13 @@ public class RobotMap implements Config {
         ahrs = new AHRS(SPI.Port.kMXP);
         turret = new CANTalon(TURRET_PORT);
         intakeBall = new Relay(INTAKE_BALL_PORT);
-        intakeGear = new Relay(INTAKE_GEAR_PORT);
+        gearGrabber = new Relay(GEAR_GRABBER_PORT);
         gearTopLimit = new DigitalInput(GEAR_TOP_LIMIT_PORT);
         gearBottomLimit = new DigitalInput(GEAR_BOTTOM_LIMIT_PORT);
         shootertalon1 = new CANTalon(RIGHT_SHOOTER_PORT);
         shootertalon2 = new CANTalon(LEFT_SHOOTER_PORT);
         turretLoader = new Relay(LOADER_RELAY_PORT);
-        climber = new Relay(CLIMBER_BUTTON);
+        climber = new CANTalon(CLIMBER_PORT);
         
         visionTable = NetworkTable.getTable("GRIP/811Contour");
         agitator = new CANTalon(AGITATOR_PORT);

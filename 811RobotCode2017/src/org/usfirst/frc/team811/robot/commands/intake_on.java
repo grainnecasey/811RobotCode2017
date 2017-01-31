@@ -29,7 +29,7 @@ public class intake_on extends Command{
 
 	    // Called once after isFinished returns true
 	    protected void end() {
-	    	Robot.intake.stopIntake();
+	    	Robot.intake.intakeStop();
 	    }
 
 	    // Called when another command which requires one or more of the same

@@ -1,9 +1,6 @@
 package org.usfirst.frc.team811.robot;
 
-import org.usfirst.frc.team811.robot.commands.climb_down;
-import org.usfirst.frc.team811.robot.commands.climb_up;
-import org.usfirst.frc.team811.robot.commands.intake_on;
-import org.usfirst.frc.team811.robot.commands.intake_off;
+import org.usfirst.frc.team811.robot.commands.*;
 
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -42,21 +39,23 @@ public class OI  implements Config{
 	JoystickButton intake_off;
 	JoystickButton climb;
 	JoystickButton vision_shoot;
-	JoystickButton gear_pick_up_up;
-	JoystickButton gear_pick_up_down;
+	JoystickButton gear_grabber_up;
+	JoystickButton gear_grabber_down;
 	
 	public OI() {
 		
 		//Operator Controller (joystick 2)
-		intake_in = new JoystickButton(RobotMap.joystick2, 1);
-		intake_in.whenPressed(new intake_on());
-		
-		intake_off = new JoystickButton(RobotMap.joystick2, 2);
-		intake_off.whenPressed(new intake_off());
+		intake_in = new JoystickButton(RobotMap.joystick2, INTAKE_BALL_BUTTON);
+		intake_in.whileHeld(new intake_on());
 		
 		climb = new JoystickButton(RobotMap.joystick2, 3);
 		climb.whileHeld(new climb_up());
 		
+		gear_grabber_up = new JoystickButton(RobotMap.joystick2, GEAR_GRABBER_UP_BUTTON);
+		gear_grabber_up.whileHeld(new gear_up());
+
+		gear_grabber_down = new JoystickButton(RobotMap.joystick2, GEAR_GRABBER_DOWN_BUTTON);
+		gear_grabber_down.whileHeld(new gear_down());
 		
 	}
     
