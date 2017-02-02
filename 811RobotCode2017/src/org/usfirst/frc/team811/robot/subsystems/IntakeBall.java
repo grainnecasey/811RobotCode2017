@@ -28,7 +28,7 @@ import edu.wpi.first.wpilibj.Joystick;
 	    	if (joy2.getRawButton(INTAKE_IN_BUTTON)) {
 	    		intakeBall.set(Relay.Value.kOn);
 	    	} 
-	    		else if (joy2.getRawButton(INTAKE_OUT_BUTTON)) {
+	    		else if (joy2.getRawButton(INTAKE_OFF_BUTTON)) {
 	    		intakeBall.set(Relay.Value.kOff);
 	    	} 
 	    	

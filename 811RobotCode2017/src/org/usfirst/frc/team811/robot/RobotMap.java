@@ -5,7 +5,9 @@ import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.SPI;
@@ -45,7 +47,10 @@ public class RobotMap implements Config {
     public static RobotDrive driveTrain;
     public static AnalogGyro driveGyro;
     public static AHRS ahrs;
-
+    public static Encoder driveEncoder;
+    
+    public static PIDController pid;
+    
     public void init() {
     	joystick1 = new Joystick(1);
         joystick2 = new Joystick(2);
@@ -68,6 +73,10 @@ public class RobotMap implements Config {
         
         visionTable = NetworkTable.getTable("GRIP/811Contour");
         agitator = new CANTalon(AGITATOR_PORT);
+        
+        driveEncoder = new Encoder(DRIVE_ENCODER_PORT_1, DRIVE_ENCODER_PORT_2);
+        driveEncoder.setReverseDirection(false);
+        driveEncoder.setDistancePerPulse(DRIVE_DISTANCE_PER_PULSE);
     }
     
 }
