@@ -36,7 +36,7 @@ public class OI  implements Config{
     // button.whileHeld(new ExampleCommand());
 	
 	JoystickButton intake_in;
-	JoystickButton intake_off;
+	JoystickButton intake_out;
 	JoystickButton climb;
 	JoystickButton vision_shoot;
 	JoystickButton gear_grabber_up;
@@ -45,8 +45,10 @@ public class OI  implements Config{
 	public OI() {
 		
 		//Operator Controller (joystick 2)
-		intake_in = new JoystickButton(RobotMap.joystick2, INTAKE_BALL_BUTTON);
+		intake_in = new JoystickButton(RobotMap.joystick2, INTAKE_IN_BUTTON);
 		intake_in.whileHeld(new intake_on());
+		intake_out = new JoystickButton(RobotMap.joystick2, INTAKE_OFF_BUTTON);
+		intake_in.whenPressed(new intake_off());
 		
 		climb = new JoystickButton(RobotMap.joystick2, 3);
 		climb.whileHeld(new climb_up());

@@ -15,9 +15,8 @@ public class GearGrabber extends Subsystem {
 
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
-	//ERIC U WEENIE THIS IS EXACTLY WHAT I DID AND YOU SAID IT WAS WRONG! feelsbadman
 
-	Relay gearIntake = RobotMap.intakeGear;
+	Relay gearGrabber = RobotMap.gearGrabber;
 	DigitalInput gearTopLimit = RobotMap.gearTopLimit;
 	DigitalInput gearBottomLimit = RobotMap.gearBottomLimit;
 	Joystick joy2 = RobotMap.joystick2;
@@ -29,24 +28,24 @@ public class GearGrabber extends Subsystem {
     
     public void gearJoyControl() {
     	if ((joy2.getRawAxis(5) > .2) && !(gearTopLimit.get())) {	//operator, right joystick, up/down
-    		gearIntake.set(Relay.Value.kForward);
+    		gearGrabber.set(Relay.Value.kForward);
     	} else if ((joy2.getRawAxis(5) < -.2) && !(gearBottomLimit.get())) {
-    		gearIntake.set(Relay.Value.kReverse);
+    		gearGrabber.set(Relay.Value.kReverse);
     	} else {
-    		gearIntake.set(Relay.Value.kOff);
+    		gearGrabber.set(Relay.Value.kOff);
     	}
     }
     
     public void gearUp() {
-    	gearIntake.set(Relay.Value.kForward);
+    	gearGrabber.set(Relay.Value.kForward);
     }
     
     public void gearDown() {
-    	gearIntake.set(Relay.Value.kForward);
+    	gearGrabber.set(Relay.Value.kForward);
     }
     
     public void gearStop() {
-    	gearIntake.set(Relay.Value.kOff);
+    	gearGrabber.set(Relay.Value.kOff);
     }
     
     

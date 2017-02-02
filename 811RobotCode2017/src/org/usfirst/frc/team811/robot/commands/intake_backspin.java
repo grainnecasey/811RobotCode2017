@@ -27,7 +27,7 @@ public class intake_backspin extends Command {
 
     // Called once after isFin 99ished returns true
     protected void end() {
-    	Robot.intake.stopIntake();
+    	Robot.intake.intakeStop();
     }
 
     // Called when another command which requires one or more of the same

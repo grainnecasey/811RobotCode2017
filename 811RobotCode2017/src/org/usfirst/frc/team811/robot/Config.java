@@ -30,8 +30,9 @@ public interface Config {
     double DRIVE_DISTANCE_PER_PULSE = 1/9.5;
     
     // Intake Ball Controls
-	int INTAKE_BALL_BUTTON = 1;
 	int INTAKE_SPEED = 1; 
+	int INTAKE_IN_BUTTON = 5;
+	int INTAKE_OFF_BUTTON = 6;
 	
 	// Gear Grabber Control
 	int GEAR_GRABBER_UP_BUTTON = 1;
@@ -47,6 +48,10 @@ public interface Config {
 	int SHOOTER_DISTANCE_PER_PULSE = 260;
 	int SHOOTER_SPEED = 1;
 	double SHOOTER_END_WAIT_TIME = 50;
+	
+	// Drive Encoder Config
+	int DRIVE_ENCODER_PORT_1 = 2;
+	int DRIVE_ENCODER_PORT_2 = 3;
 	
 	//Other Config
 	double AGITATOR_SPEED = .5;
