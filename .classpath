@@ -2,5 +2,8 @@
 <classpath>
 	<classpathentry kind="src" path="811RobotCode2017/src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="C:/Users/light/wpilib/user/java/lib/CTRLib.jar"/>
+	<classpathentry kind="lib" path="C:/Users/light/wpilib/user/java/lib/navx_frc.jar"/>
+	<classpathentry kind="lib" path="C:/Users/light/wpilib/java/current/lib/WPILib.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
