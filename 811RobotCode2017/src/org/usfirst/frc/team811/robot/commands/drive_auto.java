@@ -35,7 +35,7 @@ public class drive_auto extends Command implements Config {
 		//RobotMap.driveEncoder.setReverseDirection(true);
 		//RobotMap.driveEncoder.setDistancePerPulse(1/40);
 
-		RobotMap.pid = new PIDController(1, .6, 3, new PIDSource() 
+		RobotMap.drivePID = new PIDController(1, .6, 3, new PIDSource() 
 		{
 			public double pidGet()
 			{
@@ -59,11 +59,11 @@ public class drive_auto extends Command implements Config {
 			}
 		});
 		RobotMap.driveEncoder.reset();
-		RobotMap.pid.setAbsoluteTolerance(1);
-		RobotMap.pid.setSetpoint(distance);
-		RobotMap.pid.setOutputRange(-1, 1);
-		RobotMap.pid.setContinuous(true);
-		RobotMap.pid.enable();
+		RobotMap.drivePID.setAbsoluteTolerance(1);
+		RobotMap.drivePID.setSetpoint(distance);
+		RobotMap.drivePID.setOutputRange(-1, 1);
+		RobotMap.drivePID.setContinuous(true);
+		RobotMap.drivePID.enable();
 
 		SmartDashboard.putString("drive status", "drive forward auto"); 
 
@@ -71,14 +71,14 @@ public class drive_auto extends Command implements Config {
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		SmartDashboard.putDouble("get error", RobotMap.pid.getError());
-		SmartDashboard.putDouble("get setpoint", RobotMap.pid.getSetpoint());
+		SmartDashboard.putDouble("get error", RobotMap.drivePID.getError());
+		SmartDashboard.putDouble("get setpoint", RobotMap.drivePID.getSetpoint());
 		//Robot.drive.driveAuto(distance);
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished() {
-		if (RobotMap.pid.onTarget()) {
+		if (RobotMap.drivePID.onTarget()) {
 			SmartDashboard.putString("drive status", "pid on target");
 			return true;
 		} /*else if (RobotMap.pid.getError() == 0) {
@@ -94,14 +94,14 @@ public class drive_auto extends Command implements Config {
 	// Called once after isFinished returns true
 	protected void end() {
 		RobotMap.driveTrain.arcadeDrive(0, 0);
-		RobotMap.pid.disable();
+		RobotMap.drivePID.disable();
 	}
 
 	// Called when another command which requires one or more of the same
 	// subsystems is scheduled to run
 	protected void interrupted() {
 		RobotMap.driveTrain.arcadeDrive(0, 0);
-		RobotMap.pid.disable();
+		RobotMap.drivePID.disable();
 		SmartDashboard.putString("drive status", "was interrupted");
 	}
 }

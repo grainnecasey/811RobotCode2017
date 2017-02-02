@@ -49,7 +49,7 @@ public class RobotMap implements Config {
     public static AHRS ahrs;
     public static Encoder driveEncoder;
     
-    public static PIDController pid;
+    public static PIDController drivePID;
     
     public void init() {
     	joystick1 = new Joystick(1);
