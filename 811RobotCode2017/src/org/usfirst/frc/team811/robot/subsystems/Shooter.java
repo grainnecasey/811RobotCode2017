@@ -38,11 +38,7 @@ public class Shooter extends Subsystem implements Config {
     }
     
     public void shootWithJoy() {
-    	
-    	if (joy2.getRawButton(SHOOTER_BUTTON)) {
     		shoot();
-    	}
-    	
     }
     
     public boolean isFullSpeed() {
