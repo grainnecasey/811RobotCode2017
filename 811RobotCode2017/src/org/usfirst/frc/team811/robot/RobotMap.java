@@ -1,6 +1,7 @@
 package org.usfirst.frc.team811.robot;
 
 import com.ctre.CANTalon;
+import com.ctre.CANTalon.FeedbackDevice;
 import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.AnalogGyro;
@@ -56,17 +57,20 @@ public class RobotMap implements Config {
         joystick2 = new Joystick(2);
         
     	drivefrontright = new CANTalon(FRONT_RIGHT_PORT);
+    	drivefrontright.setFeedbackDevice(FeedbackDevice.AnalogEncoder);
         drivefrontleft = new CANTalon(FRONT_LEFT_PORT);
         drivebackleft = new CANTalon(REAR_LEFT_PORT);
         drivebackright = new CANTalon(REAR_RIGHT_PORT);
         driveTrain = new RobotDrive(drivefrontleft, drivebackleft, drivefrontright, drivebackright);
         ahrs = new AHRS(SPI.Port.kMXP);
         turret = new CANTalon(TURRET_PORT);
+        turret.setFeedbackDevice(FeedbackDevice.AnalogPot);
         intakeBall = new Relay(INTAKE_BALL_PORT);
         gearGrabber = new Relay(GEAR_GRABBER_PORT);
         gearTopLimit = new DigitalInput(GEAR_TOP_LIMIT_PORT);
         gearBottomLimit = new DigitalInput(GEAR_BOTTOM_LIMIT_PORT);
         shootertalon1 = new CANTalon(RIGHT_SHOOTER_PORT);
+        shootertalon1.setFeedbackDevice(FeedbackDevice.AnalogEncoder);
         shootertalon2 = new CANTalon(LEFT_SHOOTER_PORT);
         turretLoader = new Relay(LOADER_RELAY_PORT);
         climber = new CANTalon(CLIMBER_PORT);
