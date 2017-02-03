@@ -23,29 +23,22 @@ import edu.wpi.first.wpilibj.Joystick;
 	        //setDefaultCommand(new MySpecialCommand());
 	    }
 	    
-	    public void intakeJoyControl() {
-	    	
-	    	if (joy2.getRawButton(INTAKE_IN_BUTTON)) {
-	    		intakeBall.set(Relay.Value.kOn);
-	    	} 
-	    		else if (joy2.getRawButton(INTAKE_OFF_BUTTON)) {
-	    		intakeBall.set(Relay.Value.kOff);
-	    	} 
+	    public void intakeJoyControl() {  		
 	    	
 	    }
 	    
 	    public void intake() 
 	    {
-	    	intakeTalon.set(INTAKE_SPEED);
+	    	intakeBall.set(Relay.Value.kOn);
 	    }
 	    
 	    public void intakeStop()
 	    {
-	    	intakeTalon.set(0);	    	
+    		intakeBall.set(Relay.Value.kOff);
 	    }
 	    public void intakeBack()
 	    {
-	    	intakeTalon.set(-INTAKE_SPEED);
+    		intakeBall.set(Relay.Value.kReverse); 
 	    }
 	    
 	}
