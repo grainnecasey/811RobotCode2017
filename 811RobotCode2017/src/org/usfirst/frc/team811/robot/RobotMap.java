@@ -44,13 +44,17 @@ public class RobotMap implements Config {
     
     public static DigitalInput gearTopLimit;
     public static DigitalInput gearBottomLimit;
-    public static NetworkTable visionTable;
     public static RobotDrive driveTrain;
     public static AnalogGyro driveGyro;
     public static AHRS ahrs;
     public static Encoder driveEncoder;
     
     public static PIDController drivePID;
+    public static PIDController visionTurretController;
+    public static PIDController visionGearController;
+    
+    public static NetworkTable turretTable;
+    public static NetworkTable gearTable;
     
     public void init() {
     	joystick1 = new Joystick(1);
@@ -75,12 +79,15 @@ public class RobotMap implements Config {
         turretLoader = new Relay(LOADER_RELAY_PORT);
         climber = new CANTalon(CLIMBER_PORT);
         
-        visionTable = NetworkTable.getTable("GRIP/811Contour");
+        
         agitator = new CANTalon(AGITATOR_PORT);
         
         driveEncoder = new Encoder(DRIVE_ENCODER_PORT_1, DRIVE_ENCODER_PORT_2);
         driveEncoder.setReverseDirection(false);
         driveEncoder.setDistancePerPulse(DRIVE_DISTANCE_PER_PULSE);
+        
+        turretTable = NetworkTable.getTable("GRIP/811Contour");
+        gearTable = NetworkTable.getTable("GRIP/811Contour");
     }
     
 }

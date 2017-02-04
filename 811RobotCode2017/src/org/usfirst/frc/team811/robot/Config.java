@@ -56,5 +56,15 @@ public interface Config {
 	//Other Config
 	double AGITATOR_SPEED = .5;
 	double CLIMBER_SPEED = 1;
+	
+	//Turret Vision Config
+	double tkP = 0.04;
+    double tkI = 0.00;
+    double tkD = 0.00;
+    double tkF = 0.00;
+    double kToleranceDegrees = 2.0f;
+    int framesizeX = 260;
+	int framesizeY = 195;
+	int framethres = 5;
     
 }

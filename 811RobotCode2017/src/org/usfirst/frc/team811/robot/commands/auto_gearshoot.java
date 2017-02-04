@@ -37,6 +37,7 @@ public class auto_gearshoot extends CommandGroup {
     	//addSequential(new vision_gear()); // TODO
     	addSequential(new drive_auto(-5));
     	//addSequential(new strafe_auto(5)); // TODO
+    	//(rotate to shooting position)
     	//addSequential(new vision_shoot()); // TODO 
     	addSequential(new shoot_shoot());
     }
