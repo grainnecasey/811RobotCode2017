@@ -20,7 +20,7 @@ public class Shooter extends Subsystem implements Config {
 	
 	CANTalon shooterTalon1 = RobotMap.shootertalon1;
 	CANTalon shooterTalon2 = RobotMap.shootertalon2;
-	NetworkTable visionTable = RobotMap.visionTable;
+	NetworkTable visionTable = RobotMap.turretTable;
 	
 
 	

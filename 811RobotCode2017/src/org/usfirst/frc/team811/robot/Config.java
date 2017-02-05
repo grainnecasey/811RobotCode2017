@@ -66,5 +66,11 @@ public interface Config {
     int framesizeX = 260;
 	int framesizeY = 195;
 	int framethres = 5;
+	
+	//Gear VIsion Config
+	double gkP = 0.04;
+    double gkI = 0.00;
+    double gkD = 0.00;
+    double gkF = 0.00;
     
 }

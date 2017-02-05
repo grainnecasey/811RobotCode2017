@@ -4,6 +4,7 @@ import org.usfirst.frc.team811.robot.commands.*;
 
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -39,6 +40,30 @@ public class OI  implements Config{
 		
 		shooter = new JoystickButton(RobotMap.joystick2, SHOOTER_BUTTON);
 		shooter.whenPressed(new shoot_shoot());
+		
+		
+		//Smart Dashboard Buttons
+		SmartDashboard.putData("agitator_off", new agitator_off());
+		SmartDashboard.putData("agitator_on", new agitator_on());
+		SmartDashboard.putData("climb_down", new climb_down());
+		SmartDashboard.putData("climb_up", new climb_up());
+		SmartDashboard.putData("gear_down", new gear_down());
+		SmartDashboard.putData("gear_up", new gear_up());
+		SmartDashboard.putData("intake_backspin", new intake_backspin());
+		SmartDashboard.putData("intake_off", new intake_off());
+		SmartDashboard.putData("intake_on", new intake_on());
+		SmartDashboard.putData("shoot_shoot", new shoot_shoot());
+		SmartDashboard.putData("shoot_stop", new shoot_stop());
+		SmartDashboard.putData("vision_turn_auto", new vision_turn_auto());
+		
+		//auto
+		SmartDashboard.putData("auto_base", new auto_base());
+		SmartDashboard.putData("auto_gear", new auto_gear());
+		SmartDashboard.putData("auto_gearhopper", new auto_gearhopper());
+		SmartDashboard.putData("auto_gearready", new auto_gearready());
+		SmartDashboard.putData("auto_gearshoot", new auto_gearshoot());
+		SmartDashboard.putData("auto_hopper", new auto_hopper());
+		SmartDashboard.putData("auto_shoot", new auto_shoot());
 	}
     
     // Start the command when the button is released  and let it run the command

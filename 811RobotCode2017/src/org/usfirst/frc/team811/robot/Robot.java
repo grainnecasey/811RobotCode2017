@@ -13,6 +13,7 @@ import org.usfirst.frc.team811.robot.subsystems.Drive;
 import org.usfirst.frc.team811.robot.subsystems.GearGrabber;
 import org.usfirst.frc.team811.robot.subsystems.IntakeBall;
 import org.usfirst.frc.team811.robot.subsystems.Shooter;
+import org.usfirst.frc.team811.robot.subsystems.VisionTurret;
 
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -34,6 +35,7 @@ public class Robot extends IterativeRobot {
 	public static Climber climber;
 	public static Agitator agitator;
 	public static GearGrabber geargrabber;
+	public static VisionTurret visionTurret;
 	
     Command autonomousCommand;
     SendableChooser chooser;
@@ -50,6 +52,7 @@ public class Robot extends IterativeRobot {
 		climber = new Climber();
 		agitator = new Agitator();
 		geargrabber = new GearGrabber();
+		visionTurret = new VisionTurret();
         chooser = new SendableChooser();
 //        chooser.addObject("My Auto", new MyAutoCommand());
         SmartDashboard.putData("Auto mode", chooser);
