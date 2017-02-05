@@ -13,37 +13,37 @@ public class vision_strafe_auto extends Command {
     public vision_strafe_auto() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	requires(Robot.tracker);
+    	requires(Robot.visionGear);
     	requires(Robot.drive);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.tracker.strafeTunePID();
-    	Robot.tracker.gearStrafeCenter();
+    	Robot.visionGear.strafeTunePID();
+    	Robot.visionGear.gearStrafeCenter();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.tracker.setCamSource();
+    	Robot.visionGear.setCamSource();
     	
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	return Robot.tracker.strafeController.onTarget();
+    	return Robot.visionGear.visionGearController.onTarget();
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.tracker.strafeController.disable();
+    	Robot.visionGear.visionGearController.disable();
     	RobotMap.driveTrain.arcadeDrive(0, 0);
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	Robot.tracker.turnController.disable();
+    	Robot.visionGear.visionGearController.disable();
     	RobotMap.driveTrain.arcadeDrive(0, 0);
     }
 }

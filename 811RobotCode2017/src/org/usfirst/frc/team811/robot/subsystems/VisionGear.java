@@ -84,7 +84,7 @@ public class VisionGear extends Subsystem implements Config, PIDOutput{
 	protected void initDefaultCommand() {
 
 		
-		visionGearController = new PIDController(kP, kI, kD, kF, camSource,
+		visionGearController = new PIDController(gkP, gkI, gkD, gkF, camSource,
 				(PIDOutput) this);
 			//SmartDashboard.putData((NamedSendable) RobotMap.turnController);
 			visionGearController.setInputRange(0, 260);
