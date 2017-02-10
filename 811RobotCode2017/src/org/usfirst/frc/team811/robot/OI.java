@@ -26,19 +26,19 @@ public class OI  implements Config{
 	public OI() {
 		
 		//Operator Controller (joystick 2)
-		intake_in = new JoystickButton(RobotMap.joystick2, INTAKE_IN_BUTTON);
+		intake_in = new JoystickButton(RobotMap.joystick2, 1);
 		intake_in.whileHeld(new intake_on());
 		
 		climb = new JoystickButton(RobotMap.joystick2, 3);
 		climb.whileHeld(new climb_up());
 		
-		gear_grabber_up = new JoystickButton(RobotMap.joystick2, GEAR_GRABBER_UP_BUTTON);
+		gear_grabber_up = new JoystickButton(RobotMap.joystick2, 2);
 		gear_grabber_up.whileHeld(new gear_up());
 
-		gear_grabber_down = new JoystickButton(RobotMap.joystick2, GEAR_GRABBER_DOWN_BUTTON);
+		gear_grabber_down = new JoystickButton(RobotMap.joystick2, 0);
 		gear_grabber_down.whileHeld(new gear_down());
 		
-		shooter = new JoystickButton(RobotMap.joystick2, SHOOTER_BUTTON);
+		shooter = new JoystickButton(RobotMap.joystick2, 5);
 		shooter.whenPressed(new shoot_shoot());
 		
 		
@@ -64,6 +64,9 @@ public class OI  implements Config{
 		SmartDashboard.putData("auto_gearshoot", new auto_gearshoot());
 		SmartDashboard.putData("auto_hopper", new auto_hopper());
 		SmartDashboard.putData("auto_shoot", new auto_shoot());
+		
+		SmartDashboard.putData("vision strafe auto", new vision_strafe_auto());
+
 	}
     
     // Start the command when the button is released  and let it run the command

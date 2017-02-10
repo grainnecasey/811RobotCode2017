@@ -2,6 +2,7 @@ package org.usfirst.frc.team811.robot.commands;
 import org.usfirst.frc.team811.robot.Robot;
 import org.usfirst.frc.team811.robot.RobotMap;
 
+import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class intake_off extends Command {
@@ -22,7 +23,7 @@ public class intake_off extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return (RobotMap.intakeTalon.get() == 0);
+        return RobotMap.intakeBall.get() == Relay.Value.kOff;
     }
 
     // Called once after isFinished returns true

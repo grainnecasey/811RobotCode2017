@@ -12,17 +12,21 @@ public class CameraSource implements PIDSource{
 	private double[] defaultValue;
 	
 	double source;
+	
+	PIDSourceType sourceType = PIDSourceType.kDisplacement;
 
 	@Override
 	public void setPIDSourceType(PIDSourceType pidSource) {
 		// TODO Auto-generated method stub
+		
+		sourceType = pidSource;
 		
 	}
 
 	@Override
 	public PIDSourceType getPIDSourceType() {
 		// TODO Auto-generated method stub
-		return null;
+		return sourceType;
 	}
 
 	@Override

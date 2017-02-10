@@ -55,15 +55,18 @@ public class VisionGear extends Subsystem implements Config, PIDOutput{
 
 	RobotDrive driveTrain = RobotMap.driveTrain;
 	int count = 0;
+	int count2 = 0;
 	
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 
 	//strafe command from PID controller
 	public void pidWrite(double output) {
-		SmartDashboard.putNumber("strafe pid output", -output);
-		//driveTrain.mecanumDrive_Cartesian(-output, 0.0, 0.0, ahrs.getYaw());
-		driveTrain.arcadeDrive(-output, 0);
+		SmartDashboard.putNumber("strafe pid output", output);
+		SmartDashboard.putNumber("strafe error", visionGearController.getError());
+		count++;
+		SmartDashboard.putNumber("count", count);
+		driveTrain.mecanumDrive_Cartesian(output, 0.0, 0.0, ahrs.getYaw());
 	}
 
 	AHRS ahrs = RobotMap.ahrs;
@@ -88,12 +91,14 @@ public class VisionGear extends Subsystem implements Config, PIDOutput{
 				(PIDOutput) this);
 			//SmartDashboard.putData((NamedSendable) RobotMap.turnController);
 			visionGearController.setInputRange(0, 260);
-			visionGearController.setOutputRange(-1, 1);
+			visionGearController.setOutputRange(-.5, .5);
 			visionGearController.setAbsoluteTolerance(kTolerancePx);
 			visionGearController.setContinuous(true);
 			visionGearController.setSetpoint(0.0);
 			
 			LiveWindow.addActuator("DriveSystem", "visionGearController", visionGearController);
+			
+			
 		
 	}
 
@@ -163,7 +168,7 @@ public class VisionGear extends Subsystem implements Config, PIDOutput{
 			SmartDashboard.putString("target Status", "target found");
 			SmartDashboard.putNumber("height", height[index]);
 			SmartDashboard.putNumber("width", width[index]);
-			SmartDashboard.putNumber("error", visionGearController.getError());
+			//SmartDashboard.putNumber("error", visionGearController.getError());
 		}
 
 		return index;
@@ -241,24 +246,34 @@ public double currentCen() {
 		
 		double cen = 130;
 		
+		cenX = RobotMap.gearTable.getNumberArray("centerX", defaultValue);
+		
 		
 		//input will be the number of pixels it has to move to whatever side
 		
 		try {
 			defaultValue[0] = 0;
-			cenX = RobotMap.gearTable.getNumberArray("centerX", defaultValue);
+			
 			
 			if (cenX.length < 2 && cenX.length != 0) {
 				if (cenX[0] < 130) {
-					dif = rightTapePx - cenX[0];
+					SmartDashboard.putString("current cen status", "cen[0] < 130");
+					cen = cenX[0] + 45;
+					SmartDashboard.putNumber("centerFromCode", cen);
 				} else {
-					dif = leftTapePx - cenX[0];
+					SmartDashboard.putString("current cen status", "cen[0] !< 130");
+					cen = cenX[0] - 45;
+					SmartDashboard.putNumber("centerFromCode", cen);
 				}
 			} else {
 				if (cenX[0] > cenX[1] && cenX.length != 0) {
+					SmartDashboard.putString("current cen status", "cen[0] > cen[1]");
 					cen = Math.abs(cenX[0] - cenX[1]) / 2 + cenX[1];
-				} else {
+					SmartDashboard.putNumber("centerFromCode", cen);
+				} else  if (cenX[1] > cenX[0] && cenX.length != 0) {
+					SmartDashboard.putString("current cen status", "cen[0] < cen[1]");
 					cen = Math.abs(cenX[0] - cenX[1]) / 2 + cenX[0];
+					SmartDashboard.putNumber("centerFromCode", cen);
 				}
 				
 				//cen is the px of the center between left and right tapes in picture
@@ -275,7 +290,11 @@ public double currentCen() {
 			throw ex;  // rethrow the exception - hopefully it gets displayed
 		}
 		
+		SmartDashboard.putNumber("current center", cen);
+		count2++;
+		SmartDashboard.putNumber("count 2", count2);
 		return cen;
+		
 
 	}
 	
@@ -337,7 +356,7 @@ public double currentCen() {
 
 		} catch (RuntimeException ex) {
 			// stop the PID loop and stop the robot
-			visionGearController.disable();
+			//visionGearController.disable();
 			driveTrain.mecanumDrive_Cartesian(0.0, 0.0, 0.0, 0.0);
 			throw ex;  // rethrow the exception - hopefully it gets displayed
 		}

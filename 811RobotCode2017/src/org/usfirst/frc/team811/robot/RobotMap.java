@@ -34,7 +34,6 @@ public class RobotMap implements Config {
     public static CANTalon shootertalon1;
     public static CANTalon shootertalon2;
     public static CANTalon turret;
-    public static CANTalon intakeTalon;
     public static CANTalon agitator;
     public static CANTalon climber;
     
@@ -53,6 +52,7 @@ public class RobotMap implements Config {
     public static PIDController visionTurretController;
     public static PIDController visionGearController;
     
+    
     public static NetworkTable turretTable;
     public static NetworkTable gearTable;
     
@@ -66,28 +66,31 @@ public class RobotMap implements Config {
         drivebackleft = new CANTalon(REAR_LEFT_PORT);
         drivebackright = new CANTalon(REAR_RIGHT_PORT);
         driveTrain = new RobotDrive(drivefrontleft, drivebackleft, drivefrontright, drivebackright);
+        driveTrain.setInvertedMotor(RobotDrive.MotorType.kFrontRight, true);
+        driveTrain.setInvertedMotor(RobotDrive.MotorType.kRearRight, true);
         ahrs = new AHRS(SPI.Port.kMXP);
         turret = new CANTalon(TURRET_PORT);
         turret.setFeedbackDevice(FeedbackDevice.AnalogPot);
-        intakeBall = new Relay(INTAKE_BALL_PORT);
-        gearGrabber = new Relay(GEAR_GRABBER_PORT);
+        //intakeBall = new Relay(INTAKEBALL_PORT);
+        //gearGrabber = new Relay(GEAR_GRABBER_PORT);
         gearTopLimit = new DigitalInput(GEAR_TOP_LIMIT_PORT);
         gearBottomLimit = new DigitalInput(GEAR_BOTTOM_LIMIT_PORT);
         shootertalon1 = new CANTalon(RIGHT_SHOOTER_PORT);
         shootertalon1.setFeedbackDevice(FeedbackDevice.AnalogEncoder);
         shootertalon2 = new CANTalon(LEFT_SHOOTER_PORT);
-        turretLoader = new Relay(LOADER_RELAY_PORT);
+        //turretLoader = new Relay(LOADER_RELAY_PORT);
         climber = new CANTalon(CLIMBER_PORT);
         
         
         agitator = new CANTalon(AGITATOR_PORT);
         
-        driveEncoder = new Encoder(DRIVE_ENCODER_PORT_1, DRIVE_ENCODER_PORT_2);
-        driveEncoder.setReverseDirection(false);
-        driveEncoder.setDistancePerPulse(DRIVE_DISTANCE_PER_PULSE);
+        //driveEncoder = new Encoder(DRIVE_ENCODER_PORT_1, DRIVE_ENCODER_PORT_2);
+        //driveEncoder.setReverseDirection(false);
+        //driveEncoder.setDistancePerPulse(DRIVE_DISTANCE_PER_PULSE);
         
         turretTable = NetworkTable.getTable("GRIP/811Contour");
-        gearTable = NetworkTable.getTable("GRIP/811Contour");
+        gearTable = NetworkTable.getTable("GRIP/811GearContours");
+        
     }
     
 }

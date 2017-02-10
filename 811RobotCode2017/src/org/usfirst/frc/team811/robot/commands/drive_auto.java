@@ -35,7 +35,7 @@ public class drive_auto extends Command implements Config {
 		//RobotMap.driveEncoder.setReverseDirection(true);
 		//RobotMap.driveEncoder.setDistancePerPulse(1/40);
 
-		RobotMap.drivePID = new PIDController(1, .6, 3, new PIDSource() 
+		/*RobotMap.drivePID = new PIDController(1, .6, 3, new PIDSource() 
 		{
 			public double pidGet()
 			{
@@ -66,42 +66,52 @@ public class drive_auto extends Command implements Config {
 		RobotMap.drivePID.enable();
 
 		SmartDashboard.putString("drive status", "drive forward auto"); 
-
+		*/
 	}
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
+		/*
 		SmartDashboard.putDouble("get error", RobotMap.drivePID.getError());
 		SmartDashboard.putDouble("get setpoint", RobotMap.drivePID.getSetpoint());
 		//Robot.drive.driveAuto(distance);
+		 */
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished() {
+		/*
 		if (RobotMap.drivePID.onTarget()) {
 			SmartDashboard.putString("drive status", "pid on target");
 			return true;
-		} /*else if (RobotMap.pid.getError() == 0) {
+		} else if (RobotMap.pid.getError() == 0) {
 			SmartDashboard.putString("drive status", "pid error 0");
-			return true; }*/ 
+			return true; } 
 		else {
 			return false;
 		}
+		
 		//return RobotMap.pid.onTarget();// || isTimedOut();
 		//return (RobotMap.driveEncoder.getDistance() >= distance);
+		*/
+		return false;
 	}
 
 	// Called once after isFinished returns true
 	protected void end() {
+		/*
 		RobotMap.driveTrain.arcadeDrive(0, 0);
 		RobotMap.drivePID.disable();
+		*/
 	}
 
 	// Called when another command which requires one or more of the same
 	// subsystems is scheduled to run
 	protected void interrupted() {
+		/*
 		RobotMap.driveTrain.arcadeDrive(0, 0);
 		RobotMap.drivePID.disable();
 		SmartDashboard.putString("drive status", "was interrupted");
+		*/
 	}
 }

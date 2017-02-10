@@ -28,7 +28,7 @@ public class VisionTurret extends Subsystem implements Config, PIDOutput{
 	
 	CameraSource camSource = new CameraSource();
 	AHRS ahrs = RobotMap.ahrs;
-	public PIDController turnController = RobotMap.visionTurretController;
+	//public PIDController turnController = RobotMap.visionTurretController;
 	CANTalon turret = RobotMap.turret;
 	
 	
@@ -39,7 +39,7 @@ public class VisionTurret extends Subsystem implements Config, PIDOutput{
 	// the command from the PID controller
 	public void pidWrite(double output) {
 		SmartDashboard.putNumber("strafe pid loop d", -output);
-		SmartDashboard.putNumber("error", turnController.getError());
+		//SmartDashboard.putNumber("error", turnController.getError());
 		//count++;
 		//SmartDashboard.putNumber("count", count);
 		//turret.set(-output);
@@ -55,7 +55,7 @@ public class VisionTurret extends Subsystem implements Config, PIDOutput{
 	@Override
 	protected void initDefaultCommand() {
 
-		turnController = new PIDController(tkP, tkI, tkD, tkF, ahrs,
+		/*turnController = new PIDController(tkP, tkI, tkD, tkF, ahrs,
 			(PIDOutput) this);
 		//SmartDashboard.putData((NamedSendable) RobotMap.turnController);
 		turnController.setInputRange(-180.0f, 180.0f);
@@ -65,7 +65,7 @@ public class VisionTurret extends Subsystem implements Config, PIDOutput{
 		turnController.setSetpoint(0.0);
 		
 		LiveWindow.addActuator("DriveSystem", "RotateController", turnController);
-	
+		*/
 	}
 	
 	public void tunePID() {
@@ -74,7 +74,7 @@ public class VisionTurret extends Subsystem implements Config, PIDOutput{
 		double D = SmartDashboard.getNumber("kD");
 		double F = SmartDashboard.getNumber("kF");
 		
-		turnController.setPID(P, I, D, F);
+		//turnController.setPID(P, I, D, F);
 		
 	}
 
@@ -133,7 +133,7 @@ public class VisionTurret extends Subsystem implements Config, PIDOutput{
 			SmartDashboard.putString("target Status", "target found");
 			SmartDashboard.putNumber("height", height[index]);
 			SmartDashboard.putNumber("width", width[index]);
-			SmartDashboard.putNumber("error", turnController.getError());
+			//SmartDashboard.putNumber("error", turnController.getError());
 		}
 
 		return index;
@@ -151,7 +151,7 @@ public class VisionTurret extends Subsystem implements Config, PIDOutput{
 			if (indexOfTarget == -1) {
 				// what should the robot do?
 				// for not stop and return
-				turnController.setSetpoint(0);
+				//turnController.setSetpoint(0);
 				return;
 			}
 
@@ -182,12 +182,12 @@ public class VisionTurret extends Subsystem implements Config, PIDOutput{
 			SmartDashboard.putNumber("get setpoint", dif);
 			//double dif = x;
 
-			turnController.setSetpoint(dif);
-			turnController.enable();
+			//turnController.setSetpoint(dif);
+			//turnController.enable();
 
 		} catch (RuntimeException ex) {
 			// stop the PID loop and stop the robot
-			turnController.disable();
+			//turnController.disable();
 			turret.set(0.0);
 			throw ex;  // rethrow the exception - hopefully it gets displayed
 		}

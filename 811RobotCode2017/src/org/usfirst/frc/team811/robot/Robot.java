@@ -31,6 +31,8 @@ public class Robot extends IterativeRobot {
 	public static Drive drive;
 	
 	public static OI oi;
+	public static RobotMap robotMap;
+	
 	public static Shooter shooter;
 	public static IntakeBall intake;
 	public static Climber climber;
@@ -47,7 +49,15 @@ public class Robot extends IterativeRobot {
      * used for any initialization code.
      */
     public void robotInit() {
-		oi = new OI();
+    	/*
+    	System.out.println("robotInit()");
+    	robotMap = new RobotMap();
+    	
+		System.out.println("robotMap.init();");
+    	*/
+    	robotMap = new RobotMap();
+    	robotMap.init();
+    	
 		shooter = new Shooter();
 		drive = new Drive();
 		intake = new IntakeBall();
@@ -59,6 +69,8 @@ public class Robot extends IterativeRobot {
         chooser = new SendableChooser();
 //        chooser.addObject("My Auto", new MyAutoCommand());
         SmartDashboard.putData("Auto mode", chooser);
+        
+        oi = new OI();
     }
 	
 	/**
@@ -122,6 +134,8 @@ public class Robot extends IterativeRobot {
      */
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
+        
+        SmartDashboard.putNumber("gyro yaw value", RobotMap.ahrs.getYaw());
     }
     
     /**

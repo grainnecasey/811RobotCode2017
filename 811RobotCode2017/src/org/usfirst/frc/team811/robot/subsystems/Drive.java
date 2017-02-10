@@ -44,23 +44,24 @@ public class Drive extends Subsystem implements Config {
 	    	}
 	    	 
 	    	if (Math.abs(joystick1.getRawAxis(DRIVE_STRAFING_RIGHT_JOYSTICK_AXIS)) >= 0.3 || Math.abs(joystick1.getRawAxis(DRIVE_STRAFING_LEFT_JOYSTICK_AXIS)) >= 0.3) {
-	    		correction = 0; // gyro1.getAngle();
+	    		correction = RobotMap.ahrs.getYaw(); // gyro1.getAngle();
 	    	}
 	    	
 	    	if (joystick1.getRawAxis(DRIVE_Y_JOYSTICK_AXIS) > 0.3 || joystick1.getRawAxis(DRIVE_Y_JOYSTICK_AXIS) < -0.3) {
-	    		inputY = joystick1.getRawAxis(DRIVE_Y_JOYSTICK_AXIS);
+	    		inputY = -joystick1.getRawAxis(DRIVE_Y_JOYSTICK_AXIS);
 	    	} else {
 	    		inputY = 0.0;
 	    	}
 	    	if (joystick1.getRawAxis(DRIVE_STRAFING_RIGHT_JOYSTICK_AXIS) > 0.3) {
 	    		inputS = joystick1.getRawAxis(DRIVE_STRAFING_RIGHT_JOYSTICK_AXIS);
+	    		
 	    	} else if (joystick1.getRawAxis(DRIVE_STRAFING_LEFT_JOYSTICK_AXIS) > 0.3) {
 	    		inputS = joystick1.getRawAxis(DRIVE_STRAFING_LEFT_JOYSTICK_AXIS) * -1;
 	    	} else {	
 	    		inputS = 0.0;
 	    	}
 	    	if (joystick1.getRawAxis(DRIVE_X_JOYSTICK_AXIS) > 0.3 || joystick1.getRawAxis(DRIVE_X_JOYSTICK_AXIS) < -0.3 ) {
-	    		inputX = joystick1.getRawAxis(DRIVE_X_JOYSTICK_AXIS);
+	    		inputX = -joystick1.getRawAxis(DRIVE_X_JOYSTICK_AXIS);
 	    	} else {
 	    		inputX = 0.0;
 	    	}
@@ -71,7 +72,8 @@ public class Drive extends Subsystem implements Config {
 	    		speedScale = 1;
 	    	}
 	    	
-	    	driveTrain.mecanumDrive_Cartesian(inputS*speedScale, inputY*speedScale, inputX*speedScale + correction * -1, 0);
+	    	//System.out.println(inputS + "  " + inputY + "  " + inputX);
+	    	driveTrain.mecanumDrive_Cartesian(inputS*speedScale, inputY*speedScale, inputX*speedScale, 0);
 	    	
 	}
     

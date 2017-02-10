@@ -3,22 +3,22 @@ package org.usfirst.frc.team811.robot;
 public interface Config {
 
 	// Drive Ports
-    int FRONT_LEFT_PORT = 1;
-    int REAR_LEFT_PORT = 2;
-    int FRONT_RIGHT_PORT = 4;
-    int REAR_RIGHT_PORT = 3;
+    int FRONT_LEFT_PORT = 6;
+    int REAR_LEFT_PORT = 8;
+    int FRONT_RIGHT_PORT = 7;
+    int REAR_RIGHT_PORT = 4;
     
     // Other Ports
-    int TURRET_PORT = 1;
-    int INTAKE_BALL_PORT = 1;
-    int GEAR_GRABBER_PORT = 1;
+    int TURRET_PORT = 9;
+    int INTAKE_BALL_PORT = 2;
+    int GEAR_GRABBER_PORT = 9;
     int RIGHT_SHOOTER_PORT = 1;
-    int LEFT_SHOOTER_PORT = 1;
-    int LOADER_RELAY_PORT = 1;
+    int LEFT_SHOOTER_PORT = 3; //enc
+    int LOADER_RELAY_PORT = 3;
     int GEAR_TOP_LIMIT_PORT = 2;
     int GEAR_BOTTOM_LIMIT_PORT = 3;
-    int AGITATOR_PORT = 1;
-    int CLIMBER_PORT = 1;
+    int AGITATOR_PORT = 5;
+    int CLIMBER_PORT = 5;
 	
     // Drive Controls
     int DRIVE_X_JOYSTICK_AXIS = 4;
@@ -36,11 +36,11 @@ public interface Config {
 	
 	// Gear Grabber Control
 	int GEAR_GRABBER_UP_BUTTON = 1;
-	int GEAR_GRABBER_DOWN_BUTTON = 1;
+	int GEAR_GRABBER_DOWN_BUTTON = 3;
 	
     // Shooter/Turret Controls
     int SHOOTER_BUTTON = 6;
-    int	CLIMBER_BUTTON = 1;
+    int	CLIMBER_BUTTON = 4;
     int TURRET_BUTTON = 2;
     
     // Shooter Config

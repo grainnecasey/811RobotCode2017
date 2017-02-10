@@ -15,7 +15,7 @@ import edu.wpi.first.wpilibj.Joystick;
 	public class IntakeBall extends Subsystem implements Config {
 		
 		Joystick joy2 = RobotMap.joystick2;
-		CANTalon intakeTalon = RobotMap.intakeTalon;
+		
 		Relay intakeBall = RobotMap.intakeBall;
 
 	    public void initDefaultCommand() {

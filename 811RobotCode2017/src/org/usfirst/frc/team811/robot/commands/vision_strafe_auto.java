@@ -4,6 +4,7 @@ import org.usfirst.frc.team811.robot.Robot;
 import org.usfirst.frc.team811.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -20,24 +21,29 @@ public class vision_strafe_auto extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
     	Robot.visionGear.strafeTunePID();
+    	SmartDashboard.putString("gear vision status", "initializing");
     	Robot.visionGear.gearStrafeCenter();
+    	Robot.visionGear.setCamSource();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	//Robot.visionGear.currentCen();
     	Robot.visionGear.setCamSource();
+    	SmartDashboard.putString("gear vision status", "running");
     	
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	return Robot.visionGear.visionGearController.onTarget();
+    	return false;//Robot.visionGear.visionGearController.onTarget();
     }
 
     // Called once after isFinished returns true
     protected void end() {
     	Robot.visionGear.visionGearController.disable();
     	RobotMap.driveTrain.arcadeDrive(0, 0);
+    	SmartDashboard.putString("gear vision status", "ended");
     }
 
     // Called when another command which requires one or more of the same
@@ -45,5 +51,6 @@ public class vision_strafe_auto extends Command {
     protected void interrupted() {
     	Robot.visionGear.visionGearController.disable();
     	RobotMap.driveTrain.arcadeDrive(0, 0);
+    	SmartDashboard.putString("gear vision status", "ended");
     }
 }
