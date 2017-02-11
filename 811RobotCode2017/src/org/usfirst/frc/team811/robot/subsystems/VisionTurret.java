@@ -96,6 +96,7 @@ public class VisionTurret extends Subsystem implements Config, PIDOutput{
 		final double heightLimit = 4; // picked something high to start
 		final double widthLimit = 20; 
 		
+		/*
 		// is the target too small?
 		targetLost = true;  // assume it is to start
 		for (int i = 0; i < height.length - 1; i++) {
@@ -108,14 +109,14 @@ public class VisionTurret extends Subsystem implements Config, PIDOutput{
 		if (targetLost) {
 			return -1;
 		}
-		
+		*/
 		
 		int index = -1;
 
 		// 132 inches away from boiler: h = 9; w - 23; a = 140ish
-		double errorH = 9; // average of heights at every 1/2 meter within
+		double errorH = 100; // average of heights at every 1/2 meter within
 							// range
-		double errorW = 30; // ^^ same with widths
+		double errorW = 100; // ^^ same with widths
 
 		
 		// finds which contour is most like the U shape should be
@@ -123,8 +124,8 @@ public class VisionTurret extends Subsystem implements Config, PIDOutput{
 			
 			// what happens if the you pick up something that is small, 
 			// if the height is 5 if will still pass this test but 5 is pretty small
-			double eH = 9 - height[i];
-			double eW = 30 - width[i];
+			double eH = 27 - height[i];
+			double eW = 43 - width[i];
 			if (Math.abs(eH) < errorH && Math.abs(eW) < errorW) {
 				errorH = Math.abs(eH);
 				errorW = Math.abs(eW);
@@ -137,6 +138,8 @@ public class VisionTurret extends Subsystem implements Config, PIDOutput{
 			SmartDashboard.putNumber("height", height[index]);
 			SmartDashboard.putNumber("width", width[index]);
 			//SmartDashboard.putNumber("error", visionTurretController.getError());
+		} else {
+			SmartDashboard.putString("target Status", "index = -1");
 		}
 
 		return index;
@@ -147,7 +150,7 @@ public class VisionTurret extends Subsystem implements Config, PIDOutput{
 	public void gyroTurn() {
 		// ensure that if something bad happens, everything stops
 		// can use a try catch to stop the robot
-		double dif = 0;
+		double dif;
 		try {
 
 			int indexOfTarget = indexOfContour();
@@ -157,6 +160,7 @@ public class VisionTurret extends Subsystem implements Config, PIDOutput{
 				// for not stop and return
 				visionTurretController.setSetpoint(0);
 				SmartDashboard.putNumber("turret setpoint", 0);
+				SmartDashboard.putString("vision turret status", "indexOfContour = -1");
 				return;
 			}
 
@@ -175,7 +179,7 @@ public class VisionTurret extends Subsystem implements Config, PIDOutput{
 			
 			// angle needed to move in radians
 			double x = -1 * Math.toDegrees(r); // angle needed to move in
-			dif= ahrs.getYaw() +r;
+			//dif= ahrs.getYaw() +r;
 												// degrees
 			
 			// with a constant field of view (fov)
@@ -186,19 +190,20 @@ public class VisionTurret extends Subsystem implements Config, PIDOutput{
 
 			SmartDashboard.putNumber("turret setpoint", dif);
 			//double dif = x;
-
+			SmartDashboard.putString("vision turret status", "setting setpoint");
+			visionTurretController.setSetpoint(dif);
+			visionTurretController.enable();
 			
 
 		} catch (RuntimeException ex) {
 			// stop the PID loop and stop the robot
 			visionTurretController.disable();
 			turret.set(0.0);
+			SmartDashboard.putString("vision turret status", "exception");
 			throw ex;  // rethrow the exception - hopefully it gets displayed
 		}
 		
-		SmartDashboard.putString("vision turret status", "setting setpoint");
-		visionTurretController.setSetpoint(dif);
-		visionTurretController.enable();
+		
 	}
 
 	

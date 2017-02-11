@@ -14,7 +14,7 @@ public interface Config {
     int GEAR_GRABBER_PORT = 9;
     int RIGHT_SHOOTER_PORT = 1;
     int LEFT_SHOOTER_PORT = 3; //enc
-    int LOADER_RELAY_PORT = 3;
+    int LOADER_RELAY_PORT = 0;
     int GEAR_TOP_LIMIT_PORT = 2;
     int GEAR_BOTTOM_LIMIT_PORT = 3;
     int AGITATOR_PORT = 5;
@@ -62,15 +62,18 @@ public interface Config {
     double tkI = 0.00;
     double tkD = 0.1;
     double tkF = 0.00;
-    double kToleranceDegrees = 2.0f;
+    double kToleranceDegrees = 1.0f;
     int framesizeX = 260;
 	int framesizeY = 195;
 	int framethres = 5;
 	
-	//Gear VIsion Config
+	//Gear Vision Config
 	double gkP = 0.04;
     double gkI = 0.00;
     double gkD = 0.00;
     double gkF = 0.00;
+    
+    //Lidar Config
+    double SHOOTER_DIST_INCHES = 20; //TODO
     
 }

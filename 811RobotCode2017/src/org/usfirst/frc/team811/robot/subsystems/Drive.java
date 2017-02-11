@@ -26,6 +26,7 @@ public class Drive extends Subsystem implements Config {
     double inputY;
     double inputX;
     double inputS;
+    boolean strafing = false;
     
     boolean m_trackAngle = false;
     double m_lastAngle;
@@ -57,11 +58,14 @@ public class Drive extends Subsystem implements Config {
 	    	}
 	    	if (joystick1.getRawAxis(DRIVE_STRAFING_RIGHT_JOYSTICK_AXIS) > 0.3) {
 	    		inputS = joystick1.getRawAxis(DRIVE_STRAFING_RIGHT_JOYSTICK_AXIS);
+	    		strafing = true;
 	    		
 	    	} else if (joystick1.getRawAxis(DRIVE_STRAFING_LEFT_JOYSTICK_AXIS) > 0.3) {
 	    		inputS = joystick1.getRawAxis(DRIVE_STRAFING_LEFT_JOYSTICK_AXIS) * -1;
+	    		strafing = true;
 	    	} else {	
 	    		inputS = 0.0;
+	    		strafing = false;
 	    	}
 	    	if (joystick1.getRawAxis(DRIVE_X_JOYSTICK_AXIS) > 0.3 || joystick1.getRawAxis(DRIVE_X_JOYSTICK_AXIS) < -0.3 ) {
 	    		inputX = -joystick1.getRawAxis(DRIVE_X_JOYSTICK_AXIS);
@@ -75,8 +79,8 @@ public class Drive extends Subsystem implements Config {
 	    		speedScale = 1;
 	    	}
 	    	
-	    	if(inputX==0)
-	         {
+	    	if (strafing) {
+	    		if(inputX==0) {
 	             //User does not want rotation, If this just happened, note current angle 
 	             if (!m_trackAngle)
 	             {
@@ -98,6 +102,8 @@ public class Drive extends Subsystem implements Config {
 	              //User is applying rotation, stop tracking angle
 	              m_trackAngle=false;
 	         }
+	    	
+	    	}
 
 	         //Robot.driveTrain.mecanumDrive(x,y,rotation,gyroAngle);
 

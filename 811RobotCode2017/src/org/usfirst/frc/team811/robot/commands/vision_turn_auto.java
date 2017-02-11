@@ -20,15 +20,16 @@ public class vision_turn_auto extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	SmartDashboard.putString("vision turret status", "initizing command");
     	Robot.visionTurret.tunePID();
     	Robot.visionTurret.gyroTurn();
-    	SmartDashboard.putString("vision turret status", "initizing command");
+    	
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	Robot.visionTurret.indexOfContour();
-    	SmartDashboard.putString("vision turret status", "exec command");
+    	//SmartDashboard.putString("vision turret status", "exec command");
     	
     }
 
@@ -39,18 +40,17 @@ public class vision_turn_auto extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	RobotMap.driveTrain.stopMotor();
+    	
     	Robot.visionTurret.visionTurretController.disable();
     	SmartDashboard.putString("vision turret status", "PID disabled");
-    	
+    	//RobotMap.driveTrain.mecanumDrive_Cartesian(0, 0, 0, 0);
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	RobotMap.driveTrain.stopMotor();
     	Robot.visionTurret.visionTurretController.disable();
     	SmartDashboard.putString("vision turret status", "PID disabled");
-    	
+    	//RobotMap.driveTrain.mecanumDrive_Cartesian(0, 0, 0, 0);
     }
 }

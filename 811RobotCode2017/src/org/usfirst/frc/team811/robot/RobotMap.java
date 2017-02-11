@@ -78,7 +78,8 @@ public class RobotMap implements Config {
         shootertalon1 = new CANTalon(RIGHT_SHOOTER_PORT);
         shootertalon1.setFeedbackDevice(FeedbackDevice.AnalogEncoder);
         shootertalon2 = new CANTalon(LEFT_SHOOTER_PORT);
-        //turretLoader = new Relay(LOADER_RELAY_PORT);
+        turretLoader = new Relay(LOADER_RELAY_PORT);
+        turretLoader.set(Relay.Value.kOn);
         climber = new CANTalon(CLIMBER_PORT);
         
         

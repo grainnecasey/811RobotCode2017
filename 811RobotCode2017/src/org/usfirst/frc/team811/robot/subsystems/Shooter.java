@@ -21,6 +21,7 @@ public class Shooter extends Subsystem implements Config {
 	CANTalon shooterTalon1 = RobotMap.shootertalon1;
 	CANTalon shooterTalon2 = RobotMap.shootertalon2;
 	NetworkTable visionTable = RobotMap.turretTable;
+	Relay turretLoader = RobotMap.turretLoader;
 	
 
 	
@@ -41,6 +42,14 @@ public class Shooter extends Subsystem implements Config {
     		shoot();
     }
     
+    public void loadShooterOn() {
+    	turretLoader.set(Relay.Value.kForward);
+    }
+    
+    public void loadShooterOff() {
+    	turretLoader.set(Relay.Value.kOff);
+    }
+    
     public boolean isFullSpeed() {
     	
     	shooterTalon1.configEncoderCodesPerRev(SHOOTER_DISTANCE_PER_PULSE);
@@ -53,9 +62,12 @@ public class Shooter extends Subsystem implements Config {
     
     public void shoot() {
     	
+    	double speedL = SmartDashboard.getNumber("shoot left speed", SHOOTER_SPEED);
+    	double speedR = SmartDashboard.getNumber("shoot right speed", SHOOTER_SPEED);
+    	
     	shootingTime = System.currentTimeMillis();
-    	shooterTalon1.set(SHOOTER_SPEED);
-    	shooterTalon2.set(SHOOTER_SPEED);
+    	shooterTalon1.set(speedL);
+    	shooterTalon2.set(speedR);
     	
     	//while (shootingTime + 3000 > System.currentTimeMillis()) {
     		
