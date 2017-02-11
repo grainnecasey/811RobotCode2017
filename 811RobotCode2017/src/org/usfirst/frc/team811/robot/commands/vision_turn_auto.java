@@ -4,6 +4,7 @@ import org.usfirst.frc.team811.robot.Robot;
 import org.usfirst.frc.team811.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -21,11 +22,13 @@ public class vision_turn_auto extends Command {
     protected void initialize() {
     	Robot.visionTurret.tunePID();
     	Robot.visionTurret.gyroTurn();
+    	SmartDashboard.putString("vision turret status", "initizing command");
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	Robot.visionTurret.indexOfContour();
+    	SmartDashboard.putString("vision turret status", "exec command");
     	
     }
 
@@ -36,14 +39,18 @@ public class vision_turn_auto extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	//Robot.visionTurret.turnController.disable();
-    	RobotMap.driveTrain.arcadeDrive(0, 0);
+    	RobotMap.driveTrain.stopMotor();
+    	Robot.visionTurret.visionTurretController.disable();
+    	SmartDashboard.putString("vision turret status", "PID disabled");
+    	
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	//Robot.visionTurret.turnController.disable();
-    	RobotMap.driveTrain.arcadeDrive(0, 0);
+    	RobotMap.driveTrain.stopMotor();
+    	Robot.visionTurret.visionTurretController.disable();
+    	SmartDashboard.putString("vision turret status", "PID disabled");
+    	
     }
 }

@@ -58,9 +58,9 @@ public interface Config {
 	double CLIMBER_SPEED = 1;
 	
 	//Turret Vision Config
-	double tkP = 0.04;
+	double tkP = 0.01;
     double tkI = 0.00;
-    double tkD = 0.00;
+    double tkD = 0.1;
     double tkF = 0.00;
     double kToleranceDegrees = 2.0f;
     int framesizeX = 260;

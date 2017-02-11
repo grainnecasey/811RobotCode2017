@@ -26,6 +26,9 @@ public class Drive extends Subsystem implements Config {
     double inputY;
     double inputX;
     double inputS;
+    
+    boolean m_trackAngle = false;
+    double m_lastAngle;
 
 	public void driveWithJoy() {
 	    	
@@ -72,9 +75,63 @@ public class Drive extends Subsystem implements Config {
 	    		speedScale = 1;
 	    	}
 	    	
-	    	//System.out.println(inputS + "  " + inputY + "  " + inputX);
-	    	driveTrain.mecanumDrive_Cartesian(inputS*speedScale, inputY*speedScale, inputX*speedScale, 0);
+	    	if(inputX==0)
+	         {
+	             //User does not want rotation, If this just happened, note current angle 
+	             if (!m_trackAngle)
+	             {
+	                 m_trackAngle=true;
+	                 m_lastAngle=ahrs.getYaw();
+	             }
+
+	             //by here we are sure m_trackAngle is true and m_lastAngle
+	             //is our target angle, either just set above or on some previous
+	             //pass.
+
+	             // programatically inject rotation if
+	             // there is error.  Use P part of PID only
+	             double errVal=m_lastAngle-ahrs.getYaw();
+	             double P=0.02;
+	 
+	             inputX= P * errVal;  //proportional rotation injected to counter error
+	         } else {
+	              //User is applying rotation, stop tracking angle
+	              m_trackAngle=false;
+	         }
+
+	         //Robot.driveTrain.mecanumDrive(x,y,rotation,gyroAngle);
+
 	    	
+	    	//System.out.println(inputS + "  " + inputY + "  " + inputX);
+	    	driveTrain.mecanumDrive_Cartesian(inputS*speedScale, inputY*speedScale, inputX*speedScale, ahrs.getYaw());
+	    	
+	}
+	
+	public void strafeAuto(double strafeVal) {
+		
+		double rotation = 0;
+		
+            //User does not want rotation, If this just happened, note current angle 
+            
+            double m_lastAngle= ahrs.getYaw();
+            
+
+            //by here we are sure m_trackAngle is true and m_lastAngle
+            //is our target angle, either just set above or on some previous
+            //pass.
+
+            // programatically inject rotation if
+            // there is error.  Use P part of PID only
+            double errVal=m_lastAngle-ahrs.getYaw();
+            double P=0.02;
+
+            rotation= P * errVal;  //proportional rotation injected to counter error
+        
+        
+
+        driveTrain.mecanumDrive_Cartesian(strafeVal,0,rotation,ahrs.getYaw());
+
+		
 	}
     
     public void initDefaultCommand() {

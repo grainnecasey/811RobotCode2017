@@ -136,6 +136,10 @@ public class Robot extends IterativeRobot {
         Scheduler.getInstance().run();
         
         SmartDashboard.putNumber("gyro yaw value", RobotMap.ahrs.getYaw());
+        SmartDashboard.putNumber("gyro pitch value", RobotMap.ahrs.getPitch());
+        SmartDashboard.putNumber("gyro roll value", RobotMap.ahrs.getRoll());
+
+
     }
     
     /**

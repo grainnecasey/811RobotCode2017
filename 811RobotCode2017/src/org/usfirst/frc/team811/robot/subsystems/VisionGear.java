@@ -66,7 +66,7 @@ public class VisionGear extends Subsystem implements Config, PIDOutput{
 		SmartDashboard.putNumber("strafe error", visionGearController.getError());
 		count++;
 		SmartDashboard.putNumber("count", count);
-		driveTrain.mecanumDrive_Cartesian(output, 0.0, 0.0, ahrs.getYaw());
+		Robot.drive.strafeAuto(output);
 	}
 
 	AHRS ahrs = RobotMap.ahrs;
