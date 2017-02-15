@@ -17,31 +17,39 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class drive_auto extends Command implements Config {
 
 	double distance;
+	double distanceInInches;
 
 	public drive_auto(double inches) {
 		// Use requires() here to declare subsystem dependencies
 		// eg. requires(chassis);
 		requires(Robot.drive);
 		distance = inches;
+		distanceInInches =  Math.PI * inches;
 	}
 
 	// Called just before this Command runs the first time
 	protected void initialize() {
 		//RobotMap.driveEncoder.setDistancePerPulse(DRIVE_DISTANCE_PER_PULSE);
 		
-		setTimeout(5);
+		//setTimeout(5);
 		//RobotMap.driveEncoder.reset();
+		RobotMap.drivebackright.setEncPosition(0);
+		RobotMap.drivebackright.reverseSensor(false);
 		
 		//RobotMap.driveEncoder.setReverseDirection(true);
 		//RobotMap.driveEncoder.setDistancePerPulse(1/40);
-
-		/*RobotMap.drivePID = new PIDController(1, .6, 3, new PIDSource() 
-		{
+		
+		//1 inch = 47.8 encoder ticks 
+		
+		//double encInches =  -1 * RobotMap.drivebackright.getEncPosition() / 47.8;
+		
+		RobotMap.drivePID = new PIDController(1, .6, 3, new PIDSource() {
+			
 			public double pidGet()
 			{
 				SmartDashboard.putNumber("Auto value",
-						RobotMap.driveEncoder.getDistance());
-				return RobotMap.driveEncoder.getDistance() * -1;
+						-1 * RobotMap.drivebackright.getEncPosition() / 47.8);
+				return -1 * RobotMap.drivebackright.getEncPosition() / 47.8;
 			}
 			@Override
 			public void setPIDSourceType(PIDSourceType pidSource) {
@@ -53,65 +61,65 @@ public class drive_auto extends Command implements Config {
 			}
 		}, new PIDOutput() {
 			public void pidWrite(double d) {
-				SmartDashboard.putNumber("pid loop d", d);
-				RobotMap.driveTrain.arcadeDrive(d * .7, RobotMap.ahrs.getYaw() * -.1);
+				SmartDashboard.putNumber("pid loop d", -d);
+				RobotMap.driveTrain.arcadeDrive(0, -d);
 				SmartDashboard.putString("drive status", "in pidloop for driving");
 			}
 		});
-		RobotMap.driveEncoder.reset();
+		RobotMap.drivebackright.setEncPosition(0);
 		RobotMap.drivePID.setAbsoluteTolerance(1);
 		RobotMap.drivePID.setSetpoint(distance);
-		RobotMap.drivePID.setOutputRange(-1, 1);
+		RobotMap.drivePID.setOutputRange(-.5, .5);
 		RobotMap.drivePID.setContinuous(true);
 		RobotMap.drivePID.enable();
 
 		SmartDashboard.putString("drive status", "drive forward auto"); 
-		*/
+		
 	}
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		/*
-		SmartDashboard.putDouble("get error", RobotMap.drivePID.getError());
-		SmartDashboard.putDouble("get setpoint", RobotMap.drivePID.getSetpoint());
+		
+		SmartDashboard.putNumber("driveget error", RobotMap.drivePID.getError());
+		SmartDashboard.putNumber("drive get setpoint", RobotMap.drivePID.getSetpoint());
 		//Robot.drive.driveAuto(distance);
-		 */
+		
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished() {
-		/*
+		
 		if (RobotMap.drivePID.onTarget()) {
 			SmartDashboard.putString("drive status", "pid on target");
 			return true;
-		} else if (RobotMap.pid.getError() == 0) {
+		} else if (RobotMap.drivePID.getError() == 0) {
 			SmartDashboard.putString("drive status", "pid error 0");
 			return true; } 
 		else {
 			return false;
 		}
 		
-		//return RobotMap.pid.onTarget();// || isTimedOut();
+		//return RobotMap.drivePID.onTarget();// || isTimedOut();
 		//return (RobotMap.driveEncoder.getDistance() >= distance);
-		*/
-		return false;
+		
+		//return false;
 	}
 
 	// Called once after isFinished returns true
 	protected void end() {
-		/*
+		
 		RobotMap.driveTrain.arcadeDrive(0, 0);
 		RobotMap.drivePID.disable();
-		*/
+		
 	}
 
 	// Called when another command which requires one or more of the same
 	// subsystems is scheduled to run
 	protected void interrupted() {
-		/*
+		
 		RobotMap.driveTrain.arcadeDrive(0, 0);
 		RobotMap.drivePID.disable();
 		SmartDashboard.putString("drive status", "was interrupted");
-		*/
+		
 	}
 }

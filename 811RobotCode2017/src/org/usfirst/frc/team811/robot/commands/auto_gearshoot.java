@@ -1,6 +1,9 @@
 package org.usfirst.frc.team811.robot.commands;
 
+import org.usfirst.frc.team811.robot.RobotMap;
+
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import edu.wpi.first.wpilibj.DriverStation;
 
 /**
  *
@@ -33,12 +36,26 @@ public class auto_gearshoot extends CommandGroup {
     	 * Shoot
     	 */
     	
+    	addSequential(new drive_auto(70));
+    	addSequential(new vision_strafe_auto());
     	addSequential(new drive_auto(10));
-    	//addSequential(new vision_gear()); // TODO
-    	addSequential(new drive_auto(-5));
-    	//addSequential(new strafe_auto(5)); // TODO
-    	//(rotate to shooting position)
-    	//addSequential(new vision_shoot()); // TODO 
-    	addSequential(new shoot_shoot());
+    	addSequential(new wait(2));
+    	addSequential(new drive_auto(-10));
+    	
+    	if (RobotMap.ds.getLocation() == 1) {	//left (from driver perspective)
+    		addSequential(new strafe_auto(130));
+    		addSequential(new drive_auto(64));
+    		//addSequential(new vision_shoot());
+    	} else if (RobotMap.ds.getLocation() == 2) {	//middle
+    		addSequential(new drive_auto(-24));
+    		addSequential(new strafe_auto(85));
+    		//maybe rotate a bit to see
+    		//addSequential(new vision_shoot());
+    	} else if (RobotMap.ds.getLocation() == 3) {	//right (from driver perspective)
+    		addSequential(new drive_auto(-76));
+    		//addSequential(new turn_auto(90)); //rotate 90 degrees
+    		//addSequential(new vision_shoot());
+    	}
+    	
     }
 }

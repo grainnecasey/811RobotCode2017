@@ -16,7 +16,7 @@ import edu.wpi.first.wpilibj.Joystick;
 		
 		Joystick joy2 = RobotMap.joystick2;
 		
-		Relay intakeBall = RobotMap.intakeBall;
+		CANTalon intakeBall = RobotMap.intakeBall;
 
 	    public void initDefaultCommand() {
 	        // Set the default command for a subsystem here.
@@ -29,16 +29,16 @@ import edu.wpi.first.wpilibj.Joystick;
 	    
 	    public void intake() 
 	    {
-	    	intakeBall.set(Relay.Value.kOn);
+	    	intakeBall.set(INTAKE_SPEED);
 	    }
 	    
 	    public void intakeStop()
 	    {
-    		intakeBall.set(Relay.Value.kOff);
+    		intakeBall.set(0);
 	    }
 	    public void intakeBack()
 	    {
-    		intakeBall.set(Relay.Value.kReverse); 
+    		intakeBall.set(-INTAKE_SPEED); 
 	    }
 	    
 	}

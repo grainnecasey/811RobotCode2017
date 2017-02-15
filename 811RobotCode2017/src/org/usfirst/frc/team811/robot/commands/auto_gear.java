@@ -27,9 +27,9 @@ public class auto_gear extends CommandGroup {
 	    	 * Cross baseline
 	    	 */
 	    	
-	    	addSequential(new drive_auto(106)); // Temp value
-	    	//addSequential(vision_gear()); // TODO
-	    	//addSequential(strafe_auto()); // TODO cross baseline
+	    	addSequential(new drive_auto(70)); 
+	    	addSequential(new vision_strafe_auto()); 
+	    	addSequential(new drive_auto(8)); 
 	    }
 
 }

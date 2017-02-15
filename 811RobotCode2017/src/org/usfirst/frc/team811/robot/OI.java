@@ -35,7 +35,7 @@ public class OI  implements Config{
 		gear_grabber_up = new JoystickButton(RobotMap.joystick2, 2);
 		gear_grabber_up.whileHeld(new gear_up());
 
-		gear_grabber_down = new JoystickButton(RobotMap.joystick2, 0);
+		gear_grabber_down = new JoystickButton(RobotMap.joystick2, 6); //TODO
 		gear_grabber_down.whileHeld(new gear_down());
 		
 		shooter = new JoystickButton(RobotMap.joystick2, 5);
@@ -67,6 +67,8 @@ public class OI  implements Config{
 		SmartDashboard.putData("auto_shoot", new auto_shoot());
 		
 		SmartDashboard.putData("vision strafe auto", new vision_strafe_auto());
+		
+		SmartDashboard.putData("drive auto", new drive_auto(24));
 
 	}
     

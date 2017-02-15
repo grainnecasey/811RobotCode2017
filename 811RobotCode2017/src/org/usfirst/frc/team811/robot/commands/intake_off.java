@@ -23,7 +23,7 @@ public class intake_off extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return RobotMap.intakeBall.get() == Relay.Value.kOff;
+        return RobotMap.intakeBall.get() == 0;
     }
 
     // Called once after isFinished returns true

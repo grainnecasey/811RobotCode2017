@@ -5,6 +5,7 @@ import org.usfirst.frc.team811.robot.RobotMap;
 
 import com.ctre.CANTalon;
 
+import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -14,7 +15,7 @@ public class Agitator extends Subsystem implements Config{
     
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
-	CANTalon agitator = RobotMap.agitator;
+	Victor agitator = RobotMap.agitator;
 	
 
     public void initDefaultCommand() {

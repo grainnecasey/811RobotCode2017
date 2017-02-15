@@ -71,6 +71,9 @@ public class Robot extends IterativeRobot {
         SmartDashboard.putData("Auto mode", chooser);
         
         oi = new OI();
+        
+        RobotMap.drivebackright.setEncPosition(0);
+        RobotMap.drivebackright.configEncoderCodesPerRev((int) 1);
     }
 	
 	/**
@@ -112,6 +115,7 @@ public class Robot extends IterativeRobot {
     	
     	// schedule the autonomous command (example)
         if (autonomousCommand != null) autonomousCommand.start();
+        RobotMap.drivebackright.setEncPosition(0);
     }
 
     /**
@@ -127,6 +131,7 @@ public class Robot extends IterativeRobot {
         // continue until interrupted by another command, remove
         // this line or comment it out.
         if (autonomousCommand != null) autonomousCommand.cancel();
+        RobotMap.drivebackright.setEncPosition(0);
     }
 
     /**
@@ -138,6 +143,8 @@ public class Robot extends IterativeRobot {
         SmartDashboard.putNumber("gyro yaw value", RobotMap.ahrs.getYaw());
         SmartDashboard.putNumber("gyro pitch value", RobotMap.ahrs.getPitch());
         SmartDashboard.putNumber("gyro roll value", RobotMap.ahrs.getRoll());
+        SmartDashboard.putNumber("drive enc val", RobotMap.drivebackright.getEncPosition());
+        SmartDashboard.putNumber("drive enc corrected dist", RobotMap.drivebackright.getEncPosition() / 47.8);
 
 
     }
