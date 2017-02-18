@@ -27,7 +27,7 @@ public class gear_up extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return RobotMap.gearTopLimit.get();
+        return !RobotMap.gearTopLimit.get();
     }
 
     // Called once after isFinished returns true

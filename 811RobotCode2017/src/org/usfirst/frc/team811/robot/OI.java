@@ -21,25 +21,39 @@ public class OI  implements Config{
 	JoystickButton vision_shoot;
 	JoystickButton gear_grabber_up;
 	JoystickButton gear_grabber_down;
-	JoystickButton shooter;
+	JoystickButton gear_vision;
+	JoystickButton shoot_manual;
+	JoystickButton shoot_off;
+	JoystickButton intake_off;
+	JoystickButton vision;
 	
 	public OI() {
 		
+		
 		//Operator Controller (joystick 2)
 		intake_in = new JoystickButton(RobotMap.joystick2, 1);
-		intake_in.whileHeld(new intake_on());
+		intake_in.whenPressed(new intake_on());
 		
-		climb = new JoystickButton(RobotMap.joystick2, 3);
-		climb.whileHeld(new climb_up());
+		intake_off = new JoystickButton(RobotMap.joystick2, 2);
+		intake_off.whenPressed(new intake_off());
 		
-		gear_grabber_up = new JoystickButton(RobotMap.joystick2, 2);
-		gear_grabber_up.whileHeld(new gear_up());
+		gear_vision = new JoystickButton(RobotMap.joystick1, 1);
+		gear_vision.whenPressed(new vision_strafe_auto());
+		
+		//gear_grabber_up = new JoystickButton(RobotMap.joystick2, 2);
+		//gear_grabber_up.whileHeld(new gear_up());
 
-		gear_grabber_down = new JoystickButton(RobotMap.joystick2, 6); //TODO
-		gear_grabber_down.whileHeld(new gear_down());
+		//gear_grabber_down = new JoystickButton(RobotMap.joystick2, 6); //TODO
+		//gear_grabber_down.whileHeld(new gear_down());
 		
-		shooter = new JoystickButton(RobotMap.joystick2, 5);
-		shooter.whenPressed(new shoot_shoot());
+		shoot_manual = new JoystickButton(RobotMap.joystick2, 8);
+		shoot_manual.whenPressed(new shoot_comp_man());
+		
+		vision_shoot = new JoystickButton(RobotMap.joystick2, 3);
+		vision_shoot.whenPressed(new shoot_compilation());
+		
+		shoot_off = new JoystickButton(RobotMap.joystick2, 4);
+		shoot_off.whenPressed(new shoot_comp_stop());
 		
 		
 		//Smart Dashboard Buttons
@@ -69,6 +83,8 @@ public class OI  implements Config{
 		SmartDashboard.putData("vision strafe auto", new vision_strafe_auto());
 		
 		SmartDashboard.putData("drive auto", new drive_auto(24));
+		SmartDashboard.putData("turn_auto(90)", new turn_auto(90));
+		SmartDashboard.putData("strafe_auto(24", new strafe_auto(12));
 
 	}
     

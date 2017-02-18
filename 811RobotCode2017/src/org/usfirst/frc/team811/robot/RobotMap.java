@@ -16,6 +16,7 @@ import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
@@ -43,8 +44,7 @@ public class RobotMap implements Config {
     public static Victor agitator;
     public static Victor gearGrabber;
     
-    public static Relay turretLoader;
-    
+    public static Victor turretLoader;
     
     public static DigitalInput gearTopLimit;
     public static DigitalInput gearBottomLimit;
@@ -78,7 +78,7 @@ public class RobotMap implements Config {
         driveTrain = new RobotDrive(drivefrontleft, drivebackleft, drivefrontright, drivebackright);
         driveTrain.setInvertedMotor(RobotDrive.MotorType.kFrontRight, true);
         driveTrain.setInvertedMotor(RobotDrive.MotorType.kRearRight, true);
-        ahrs = new AHRS(SerialPort.Port.kUSB);
+        ahrs = new AHRS(SerialPort.Port.kMXP);
         turret = new CANTalon(TURRET_PORT);
         turret.setFeedbackDevice(FeedbackDevice.AnalogPot);
         intakeBall = new CANTalon(INTAKE_BALL_PORT);
@@ -87,9 +87,11 @@ public class RobotMap implements Config {
         gearBottomLimit = new DigitalInput(GEAR_BOTTOM_LIMIT_PORT);
         shootertalon1 = new CANTalon(RIGHT_SHOOTER_PORT);
         shootertalon1.setFeedbackDevice(FeedbackDevice.AnalogEncoder);
+        shootertalon1.reverseOutput(true);
         shootertalon2 = new CANTalon(LEFT_SHOOTER_PORT);
-        turretLoader = new Relay(LOADER_RELAY_PORT);
-        turretLoader.set(Relay.Value.kOn);
+        shootertalon2.reverseOutput(true);
+        turretLoader = new Victor(LOADER_RELAY_PORT);
+       // turretLoader.set(Relay.Value.kOn);
         climber = new CANTalon(CLIMBER_PORT);
         agitator = new Victor(AGITATOR_PORT);
         

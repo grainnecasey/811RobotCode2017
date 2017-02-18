@@ -67,17 +67,18 @@ public class VisionTurret extends Subsystem implements Config, PIDOutput{
 		
 		//LiveWindow.addActuator("DriveSystem", "RotateController", visionTurretController);
 		SmartDashboard.putString("vision turret status", "init pid");
+		System.out.println("pid cont initialized");
 		
 	}
 	
 	public void tunePID() {
-		double P = SmartDashboard.getNumber("kP");
+		/*double P = SmartDashboard.getNumber("kP");
 		double I = SmartDashboard.getNumber("kI");
 		double D = SmartDashboard.getNumber("kD");
 		double F = SmartDashboard.getNumber("kF");
 		
 		visionTurretController.setPID(P, I, D, F);
-		SmartDashboard.putString("vision turret status", "tune pid");
+		SmartDashboard.putString("vision turret status", "tune pid");*/
 		
 	}
 
@@ -132,15 +133,8 @@ public class VisionTurret extends Subsystem implements Config, PIDOutput{
 				index = i;
 			}
 		}
-
-		if (index != -1) {
-			SmartDashboard.putString("target Status", "target found");
-			SmartDashboard.putNumber("height", height[index]);
-			SmartDashboard.putNumber("width", width[index]);
-			//SmartDashboard.putNumber("error", visionTurretController.getError());
-		} else {
-			SmartDashboard.putString("target Status", "index = -1");
-		}
+		//System.out.println(" height = " + height[index]);
+		//System.out.println(" width = " + width[index]);
 
 		return index;
 
@@ -159,7 +153,7 @@ public class VisionTurret extends Subsystem implements Config, PIDOutput{
 				// what should the robot do?
 				// for not stop and return
 				visionTurretController.setSetpoint(0);
-				SmartDashboard.putNumber("turret setpoint", 0);
+				//SmartDashboard.putNumber("turret setpoint", 0);
 				SmartDashboard.putString("vision turret status", "indexOfContour = -1");
 				return;
 			}
@@ -169,30 +163,36 @@ public class VisionTurret extends Subsystem implements Config, PIDOutput{
 			defaultValue[0] = 0;
 			cenX = RobotMap.turretTable.getNumberArray("centerX", defaultValue);
 
-			double d = SmartDashboard.getDouble("distance");
-			double i = (.274728886 * d + 42.40897141);	//42/45 * d; // inches displayed in
-														// screen
-
-			double r =Math.atan((1 / (2d))					//Math.atan(((i / 2) * d)	260/50
-					* (1 - (cenX[indexOfTarget] / 130)));
-			
-			
-			// angle needed to move in radians
-			double x = -1 * Math.toDegrees(r); // angle needed to move in
-			//dif= ahrs.getYaw() +r;
+//			double d = SmartDashboard.getDouble("distance");
+//			double i = (.274728886 * d + 42.40897141);	//42/45 * d; // inches displayed in
+//														// screen
+//
+//			double r =Math.atan((1 / (2d))					//Math.atan(((i / 2) * d)	260/50
+//					* (1 - (cenX[indexOfTarget] / 130)));
+//			
+//			
+//			// angle needed to move in radians
+//			double x = -1 * Math.toDegrees(r); // angle needed to move in
+//			//dif= ahrs.getYaw() +r;
 												// degrees
+			
+			double center = SmartDashboard.getNumber("manual center", 140);
 			
 			// with a constant field of view (fov)
 			double degreesPerPixel = 60.0/((double)framesizeX);
-			double pixelsFromCenter = 130 - cenX[indexOfTarget];
+			double pixelsFromCenter = center - cenX[indexOfTarget];
 			double errorInDegrees = degreesPerPixel * pixelsFromCenter;
 			dif = ahrs.getYaw() - errorInDegrees;
 
 			SmartDashboard.putNumber("turret setpoint", dif);
 			//double dif = x;
 			SmartDashboard.putString("vision turret status", "setting setpoint");
+			
+			System.out.println("setpoint: " + dif);
+			
 			visionTurretController.setSetpoint(dif);
 			visionTurretController.enable();
+			System.out.println("vision pid set setpoint + enabled");
 			
 
 		} catch (RuntimeException ex) {
@@ -263,6 +263,10 @@ public class VisionTurret extends Subsystem implements Config, PIDOutput{
 		SmartDashboard.putBoolean("is centered", isCentered);
 
 		return isCentered;
+	}
+	
+	public boolean isOnTarget() {
+		return visionTurretController.onTarget();
 	}
 
 

@@ -10,6 +10,8 @@ public class intake_off extends Command {
     public void intake_stop() {
         // Use requires() here to declare subsystem dependencies
     	requires(Robot.intake);
+    	setTimeout(.1);
+    	
     }
 
     // Called just before this Command runs the first time
@@ -23,16 +25,18 @@ public class intake_off extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return RobotMap.intakeBall.get() == 0;
+        return true;
     }
 
     // Called once after isFinished returns true
     protected void end() {
+    	//RobotMap.intakeBall.set(0);
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+    	//RobotMap.intakeBall.set(0);
     }
 
 }

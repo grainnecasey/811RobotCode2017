@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
+import org.usfirst.frc.team811.robot.commands.*;
 import org.usfirst.frc.team811.robot.subsystems.Agitator;
 import org.usfirst.frc.team811.robot.subsystems.Climber;
 import org.usfirst.frc.team811.robot.subsystems.Drive;
@@ -26,7 +27,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * creating this project, you must also update the manifest file in the resource
  * directory.
  */
-public class Robot extends IterativeRobot {
+public class Robot extends IterativeRobot implements Config {
 
 	public static Drive drive;
 	
@@ -43,6 +44,7 @@ public class Robot extends IterativeRobot {
 	
     Command autonomousCommand;
     SendableChooser chooser;
+    
 
     /**
      * This function is run when the robot is first started up and should be
@@ -67,10 +69,17 @@ public class Robot extends IterativeRobot {
 		visionTurret = new VisionTurret();
 		visionGear = new VisionGear();
         chooser = new SendableChooser();
-//        chooser.addObject("My Auto", new MyAutoCommand());
-        SmartDashboard.putData("Auto mode", chooser);
+        chooser.addDefault("Drive Auto", new auto_base());
+        chooser.addObject("Gear Auto", new auto_gear());
+        // chooser.addObject("Vision Auto", new auto_shoot()); TODO
+        // chooser.addObject("Hopper Auto", new auto_hopper()); TODO
+        chooser.addObject("Nothing Auto", new auto_nothing());
+        SmartDashboard.putData("Auto Mode Chooser", chooser);
+        SmartDashboard.putNumber("manual center", 145);
+
         
         oi = new OI();
+       
         
         RobotMap.drivebackright.setEncPosition(0);
         RobotMap.drivebackright.configEncoderCodesPerRev((int) 1);
@@ -132,6 +141,8 @@ public class Robot extends IterativeRobot {
         // this line or comment it out.
         if (autonomousCommand != null) autonomousCommand.cancel();
         RobotMap.drivebackright.setEncPosition(0);
+        
+
     }
 
     /**
@@ -140,11 +151,12 @@ public class Robot extends IterativeRobot {
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
         
+//        SmartDashboard.putBoolean("top gear limit", RobotMap.gearTopLimit.get());
+//        SmartDashboard.putBoolean("bottom gear limit", RobotMap.gearBottomLimit.get());
         SmartDashboard.putNumber("gyro yaw value", RobotMap.ahrs.getYaw());
-        SmartDashboard.putNumber("gyro pitch value", RobotMap.ahrs.getPitch());
-        SmartDashboard.putNumber("gyro roll value", RobotMap.ahrs.getRoll());
         SmartDashboard.putNumber("drive enc val", RobotMap.drivebackright.getEncPosition());
-        SmartDashboard.putNumber("drive enc corrected dist", RobotMap.drivebackright.getEncPosition() / 47.8);
+        SmartDashboard.putNumber("drive enc corrected dist", RobotMap.drivebackright.getEncPosition() / DRIVE_DISTANCE_PER_PULSE);
+        
 
 
     }

@@ -35,7 +35,7 @@ public class vision_turn_auto extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	return Robot.visionTurret.isCentered();
+    	return Robot.visionTurret.isOnTarget();
     }
 
     // Called once after isFinished returns true

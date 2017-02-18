@@ -28,9 +28,9 @@ public class auto_shoot extends CommandGroup
 		 */
 		
 		// TODO add difernet starting positions
-		addSequential(new drive_auto(10));
     	//addSequential(new vision_shoot()); // TODO
-		addSequential(new shoot_shoot());
+		addSequential(new drive_auto(36));
+		addSequential(new shoot_compilation());
 		//addSequential(new strafe_auto(10)); // TODO Cross baseline
 	}
 }

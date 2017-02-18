@@ -42,5 +42,6 @@ public class shoot_stop extends Command {
     protected void interrupted() {
     	Robot.shooter.stopShooter();
     	Robot.shooter.loadShooterOff();
+    	//Robot.agitator.agOff();
     }
 }

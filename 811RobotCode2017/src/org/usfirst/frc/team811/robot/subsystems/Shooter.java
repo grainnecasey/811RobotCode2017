@@ -21,7 +21,7 @@ public class Shooter extends Subsystem implements Config {
 	CANTalon shooterTalon1 = RobotMap.shootertalon1;
 	CANTalon shooterTalon2 = RobotMap.shootertalon2;
 	NetworkTable visionTable = RobotMap.turretTable;
-	Relay turretLoader = RobotMap.turretLoader;
+	Victor turretLoader = RobotMap.turretLoader;
 	
 
 	
@@ -43,11 +43,11 @@ public class Shooter extends Subsystem implements Config {
     }
     
     public void loadShooterOn() {
-    	turretLoader.set(Relay.Value.kForward);
+    	turretLoader.set(0.5);
     }
     
     public void loadShooterOff() {
-    	turretLoader.set(Relay.Value.kOff);
+    	turretLoader.set(0);
     }
     
     public boolean isFullSpeed() {
@@ -67,7 +67,7 @@ public class Shooter extends Subsystem implements Config {
     	
     	shootingTime = System.currentTimeMillis();
     	shooterTalon1.set(speedL);
-    	shooterTalon2.set(speedR);
+    	shooterTalon2.set(-speedR);
     	
     	//while (shootingTime + 3000 > System.currentTimeMillis()) {
     		

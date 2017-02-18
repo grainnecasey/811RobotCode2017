@@ -10,7 +10,7 @@ public class intake_on extends Command{
 	        // Use requires() here to declare subsystem dependencies
 	        // eg. requires(chassis);
 	    	requires(Robot.intake);
-	    	//setTimeout(2);
+	    	setTimeout(.1);
 	    }
 
 	    // Called just before this Command runs the first time
@@ -24,17 +24,17 @@ public class intake_on extends Command{
 
 	    // Make this return true when this Command no longer needs to run execute()
 	    protected boolean isFinished() {
-	        return false;
+	        return isTimedOut();
 	    }
 
 	    // Called once after isFinished returns true
 	    protected void end() {
-	    	Robot.intake.intakeStop();
+	    	//Robot.intake.intakeStop();
 	    }
 
 	    // Called when another command which requires one or more of the same
 	    // subsystems is scheduled to run
 	    protected void interrupted() {
-	    	Robot.intake.intakeStop();
+	    	//Robot.intake.intakeStop();
 	    }
 }

@@ -66,7 +66,7 @@ public double pidGet() {
 	public void start() {
 
 		updater.scheduleAtFixedRate(task, 0, 20);
-		SmartDashboard.putString("lidar status", "started");
+		//SmartDashboard.putString("lidar status", "started");
 
 	}
 
@@ -85,7 +85,7 @@ public double pidGet() {
 	public void stop() {
 
 		updater.cancel();
-		SmartDashboard.putString("lidar status", "canceled");
+		//SmartDashboard.putString("lidar status", "canceled");
 
 	}
 
@@ -128,14 +128,14 @@ public double pidGet() {
 			i2c.writeBulk(readData);
 			if (!(i2c.readOnly( distance,2))) {//(LIDAR_DISTANCE_REGISTER, 2, distance))) {
 															// Read in measurement
-				SmartDashboard.putString("lidar status", "read returned true");
+				//SmartDashboard.putString("lidar status", "read returned true");
 			}
 			
 			Timer.delay(0.01); // Delay to prevent over polling
 			
 			
 			
-			SmartDashboard.putNumber("lidar count", count);
+			//SmartDashboard.putNumber("lidar count", count);
 
 
 	}
@@ -153,12 +153,12 @@ public double pidGet() {
 
 				if(getDistance() < 90 && getDistance() > 84){
 
-					SmartDashboard.putBoolean("Correct distance from human feeder", true);
+					//SmartDashboard.putBoolean("Correct distance from human feeder", true);
 				}
 
 				else{
 
-					SmartDashboard.putBoolean("Correct distance from human feeder", false);
+					//SmartDashboard.putBoolean("Correct distance from human feeder", false);
 
 				}
 
@@ -166,17 +166,17 @@ public double pidGet() {
 
 				if(getDistance() < 80 && getDistance() > 70){
 
-					SmartDashboard.putBoolean("Correct distance to stacks", true);
+					//SmartDashboard.putBoolean("Correct distance to stacks", true);
 
 				}
 
 				else{
 
-					SmartDashboard.putBoolean("Correct distance to stacks", false);
+					//SmartDashboard.putBoolean("Correct distance to stacks", false);
 
 				}
 
-				SmartDashboard.putNumber("LIDAR distance Inches", (getDistance() / 2.54));
+				//SmartDashboard.putNumber("LIDAR distance Inches", (getDistance() / 2.54));
 
 				try {
 

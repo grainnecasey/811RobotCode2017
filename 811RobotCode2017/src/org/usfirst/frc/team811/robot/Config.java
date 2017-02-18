@@ -21,7 +21,7 @@ public interface Config {
     int GEAR_GRABBER_PORT = 9;
     int LOADER_RELAY_PORT = 0;
     int GEAR_TOP_LIMIT_PORT = 2;
-    int GEAR_BOTTOM_LIMIT_PORT = 3;
+    int GEAR_BOTTOM_LIMIT_PORT = 1;
     int AGITATOR_PORT = 5;
 	
     // Drive Controls
@@ -31,7 +31,7 @@ public interface Config {
     int DRIVE_STRAFING_LEFT_JOYSTICK_AXIS = 2;
     
     // Drive Config
-    double DRIVE_DISTANCE_PER_PULSE = 1/9.5;
+    double DRIVE_DISTANCE_PER_PULSE = 82.6;
     
     // Intake Ball Controls
 	double INTAKE_SPEED = .7; 
@@ -63,7 +63,7 @@ public interface Config {
 	double CLIMBER_SPEED = 1;
 	
 	//Turret Vision Config
-	double tkP = 0.01;
+	double tkP = 0.04;
     double tkI = 0.00;
     double tkD = 0.1;
     double tkF = 0.00;

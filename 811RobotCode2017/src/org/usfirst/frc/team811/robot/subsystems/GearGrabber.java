@@ -3,6 +3,7 @@ package org.usfirst.frc.team811.robot.subsystems;
 import org.usfirst.frc.team811.robot.Config;
 import org.usfirst.frc.team811.robot.Robot;
 import org.usfirst.frc.team811.robot.RobotMap;
+import org.usfirst.frc.team811.robot.commands.gear_joy_control;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Joystick;
@@ -24,14 +25,15 @@ public class GearGrabber extends Subsystem implements Config{
 	Joystick joy2 = RobotMap.joystick2;
 
     public void initDefaultCommand() {
+    	
         // Set the default command for a subsystem here.
-        //setDefaultCommand(new MySpecialCommand());
+        //setDefaultCommand(new gear_joy_control());
     }
     
     public void gearJoyControl() {
-    	if ((joy2.getRawAxis(5) > .2) && !(gearTopLimit.get())) {	//operator, right joystick, up/down
+    	if ((joy2.getRawAxis(1) > .2) && (gearTopLimit.get())) {	//operator, right joystick, up/down
     		gearGrabber.set(GEAR_GRAB_SPEED);
-    	} else if ((joy2.getRawAxis(5) < -.2) && !(gearBottomLimit.get())) {
+    	} else if ((joy2.getRawAxis(1) < -.2) && (gearBottomLimit.get())) {
     		gearGrabber.set(-GEAR_GRAB_SPEED);
     	} else {
     		gearGrabber.set(0);

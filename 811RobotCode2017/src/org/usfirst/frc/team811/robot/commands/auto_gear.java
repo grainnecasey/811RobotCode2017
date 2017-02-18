@@ -27,9 +27,10 @@ public class auto_gear extends CommandGroup {
 	    	 * Cross baseline
 	    	 */
 	    	
-	    	addSequential(new drive_auto(70)); 
-	    	addSequential(new vision_strafe_auto()); 
-	    	addSequential(new drive_auto(8)); 
+	    	addSequential(new drive_auto(-80)); 
+	    	addSequential(new wait(2));
+	    	//addSequential(new vision_strafe_auto()); 
+	    	addSequential(new drive_auto(-13)); 
 	    }
 
 }

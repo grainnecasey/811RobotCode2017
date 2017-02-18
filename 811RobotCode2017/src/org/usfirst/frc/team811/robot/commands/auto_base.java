@@ -25,7 +25,7 @@ public class auto_base extends CommandGroup {
 	    	/* Cross baseline
 	    	 */
 	    	
-	    	addSequential(new drive_auto(10));
+	    	addSequential(new drive_auto(220));
 	    }
 
 }

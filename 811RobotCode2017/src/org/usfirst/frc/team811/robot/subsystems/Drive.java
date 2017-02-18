@@ -35,6 +35,7 @@ public class Drive extends Subsystem implements Config {
 	    	
 	    	boolean strafe = false;
 	    	double correction = 0;
+	    	int strafeCount = 0;
 	    	
 	    	if (Math.abs(joystick1.getRawAxis(DRIVE_STRAFING_RIGHT_JOYSTICK_AXIS)) <= 0.1 && Math.abs(joystick1.getRawAxis(DRIVE_STRAFING_LEFT_JOYSTICK_AXIS)) <= 0.1) {
 	    		strafe = true;
@@ -59,13 +60,16 @@ public class Drive extends Subsystem implements Config {
 	    	if (joystick1.getRawAxis(DRIVE_STRAFING_RIGHT_JOYSTICK_AXIS) > 0.3) {
 	    		inputS = joystick1.getRawAxis(DRIVE_STRAFING_RIGHT_JOYSTICK_AXIS);
 	    		strafing = true;
+	    		strafeCount++;
 	    		
 	    	} else if (joystick1.getRawAxis(DRIVE_STRAFING_LEFT_JOYSTICK_AXIS) > 0.3) {
 	    		inputS = joystick1.getRawAxis(DRIVE_STRAFING_LEFT_JOYSTICK_AXIS) * -1;
 	    		strafing = true;
+	    		strafeCount++;
 	    	} else {	
 	    		inputS = 0.0;
 	    		strafing = false;
+	    		strafeCount = 0;
 	    	}
 	    	if (joystick1.getRawAxis(DRIVE_X_JOYSTICK_AXIS) > 0.3 || joystick1.getRawAxis(DRIVE_X_JOYSTICK_AXIS) < -0.3 ) {
 	    		inputX = -joystick1.getRawAxis(DRIVE_X_JOYSTICK_AXIS);
@@ -79,37 +83,27 @@ public class Drive extends Subsystem implements Config {
 	    		speedScale = 1;
 	    	}
 	    	
-	    	if (strafing) {
-	    		if(inputX==0) {
-	             //User does not want rotation, If this just happened, note current angle 
-	             if (!m_trackAngle)
-	             {
-	                 m_trackAngle=true;
+	    	if (strafeCount == 1) {
+	    		
 	                 m_lastAngle=ahrs.getYaw();
-	             }
 
-	             //by here we are sure m_trackAngle is true and m_lastAngle
-	             //is our target angle, either just set above or on some previous
-	             //pass.
-
-	             // programatically inject rotation if
-	             // there is error.  Use P part of PID only
-	             double errVal=m_lastAngle-ahrs.getYaw();
-	             double P=0.02;
-	 
-	             inputX= P * errVal;  //proportional rotation injected to counter error
-	         } else {
-	              //User is applying rotation, stop tracking angle
-	              m_trackAngle=false;
-	         }
+	         } 
 	    	
-	    	}
-
+	    	
 	         //Robot.driveTrain.mecanumDrive(x,y,rotation,gyroAngle);
+	    	double errVal=m_lastAngle-ahrs.getYaw();
+	    	double P=0.02;
 
+			if (inputX == 0 && strafing) {
+				
+				inputX= P * errVal;  //proportional rotation injected to counter error
+			
 	    	
+	    }
+
 	    	//System.out.println(inputS + "  " + inputY + "  " + inputX);
-	    	driveTrain.mecanumDrive_Cartesian(inputS*speedScale, inputY*speedScale, inputX*speedScale, ahrs.getYaw());
+	    	driveTrain.mecanumDrive_Cartesian(inputS*speedScale, -1 *inputY*speedScale, -1 * inputX*speedScale, 0);
+	    	m_trackAngle = false;
 	    	
 	}
 	
