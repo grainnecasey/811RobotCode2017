@@ -29,7 +29,7 @@ public class vision_turn_auto extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	Robot.visionTurret.indexOfContour();
-    	//SmartDashboard.putString("vision turret status", "exec command");
+    	SmartDashboard.putString("vision turret status", "exec command");
     	
     }
 

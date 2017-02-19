@@ -59,13 +59,13 @@ public interface Config {
 	int DRIVE_ENCODER_PORT_2 = 3;
 	
 	//Other Config
-	double AGITATOR_SPEED = .5;
+	double AGITATOR_SPEED = .9;
 	double CLIMBER_SPEED = 1;
 	
 	//Turret Vision Config
-	double tkP = 0.04;
+	double tkP = 0.01;
     double tkI = 0.00;
-    double tkD = 0.1;
+    double tkD = 0.4;
     double tkF = 0.00;
     double kToleranceDegrees = 1.0f;
     int framesizeX = 260;

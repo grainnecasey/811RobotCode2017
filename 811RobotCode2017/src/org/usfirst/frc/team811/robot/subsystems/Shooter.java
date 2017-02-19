@@ -43,7 +43,7 @@ public class Shooter extends Subsystem implements Config {
     }
     
     public void loadShooterOn() {
-    	turretLoader.set(0.5);
+    	turretLoader.set(1);
     }
     
     public void loadShooterOff() {

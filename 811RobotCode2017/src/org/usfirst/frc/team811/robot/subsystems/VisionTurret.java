@@ -72,13 +72,13 @@ public class VisionTurret extends Subsystem implements Config, PIDOutput{
 	}
 	
 	public void tunePID() {
-		/*double P = SmartDashboard.getNumber("kP");
+		double P = SmartDashboard.getNumber("kP");
 		double I = SmartDashboard.getNumber("kI");
 		double D = SmartDashboard.getNumber("kD");
 		double F = SmartDashboard.getNumber("kF");
 		
 		visionTurretController.setPID(P, I, D, F);
-		SmartDashboard.putString("vision turret status", "tune pid");*/
+		SmartDashboard.putString("vision turret status", "tune pid");
 		
 	}
 
