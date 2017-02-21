@@ -154,7 +154,7 @@ public class VisionTurret extends Subsystem implements Config, PIDOutput{
 				// for not stop and return
 				visionTurretController.setSetpoint(0);
 				//SmartDashboard.putNumber("turret setpoint", 0);
-				SmartDashboard.putString("vision turret status", "indexOfContour = -1");
+				SmartDashboard.putString("vision turret status", "indexOfContou r = -1");
 				return;
 			}
 

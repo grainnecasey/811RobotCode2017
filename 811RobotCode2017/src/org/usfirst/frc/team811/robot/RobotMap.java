@@ -62,6 +62,7 @@ public class RobotMap implements Config {
     
     public static DriverStation ds = DriverStation.getInstance();
     
+    public static int gear_auto_pos;
     
     
     public void init() {
@@ -100,6 +101,8 @@ public class RobotMap implements Config {
         //driveEncoder = new Encoder(DRIVE_ENCODER_PORT_1, DRIVE_ENCODER_PORT_2);
         //driveEncoder.setReverseDirection(false);
         //driveEncoder.setDistancePerPulse(DRIVE_DISTANCE_PER_PULSE);
+        
+        gear_auto_pos = 1;
         
         turretTable = NetworkTable.getTable("GRIP/811Contour");
         gearTable = NetworkTable.getTable("GRIP/811GearContours");

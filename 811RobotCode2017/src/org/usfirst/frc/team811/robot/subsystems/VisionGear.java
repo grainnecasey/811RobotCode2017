@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj.NamedSendable;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.RobotDrive;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 //import javafx.scene.image.Image;
@@ -24,6 +25,8 @@ import java.util.concurrent.*;
 //import org.opencv.imgproc.Imgproc;
 //import org.opencv.videoio.VideoCapture;
 import javax.imageio.ImageIO;
+
+
 
 
 
@@ -57,16 +60,26 @@ public class VisionGear extends Subsystem implements Config, PIDOutput{
 	int count = 0;
 	int count2 = 0;
 	
+	Timer timer;
+	double m_lastAngle = 0;
+	double rotation = 0;
+	
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 
 	//strafe command from PID controller
 	public void pidWrite(double output) {
+		//timer.delay(1);
 		SmartDashboard.putNumber("strafe pid output", output);
 		SmartDashboard.putNumber("strafe error", visionGearController.getError());
 		count++;
 		SmartDashboard.putNumber("count", count);
-		Robot.drive.strafeAuto(output);
+		double errVal= -(m_lastAngle-RobotMap.ahrs.getYaw());
+        double P=0.002;
+
+        rotation= -P * errVal;
+		driveTrain.mecanumDrive_Cartesian(output, 0, rotation, 0);
+		//Robot.drive.strafe_auto_dist(output);
 	}
 
 	AHRS ahrs = RobotMap.ahrs;
@@ -75,7 +88,7 @@ public class VisionGear extends Subsystem implements Config, PIDOutput{
 	public PIDController visionGearController = RobotMap.visionGearController;
 
 	double rotateToAngleRate;
-	double kTolerancePx = 2;
+	double kTolerancePx = 5;
 
 	/* The following PID Controller coefficients will need to be tuned */
 	/* to match the dynamics of your drive system. Note that the */
@@ -87,7 +100,7 @@ public class VisionGear extends Subsystem implements Config, PIDOutput{
 	protected void initDefaultCommand() {
 
 		
-		visionGearController = new PIDController(gkP, gkI, gkD, gkF, camSource,
+		visionGearController = new PIDController(gkP, gkI, gkD, camSource,
 				(PIDOutput) this);
 			//SmartDashboard.putData((NamedSendable) RobotMap.turnController);
 			visionGearController.setInputRange(0, 260);
@@ -98,6 +111,8 @@ public class VisionGear extends Subsystem implements Config, PIDOutput{
 			
 			LiveWindow.addActuator("DriveSystem", "visionGearController", visionGearController);
 			
+			m_lastAngle = RobotMap.ahrs.getYaw();
+			
 			
 		
 	}
@@ -106,9 +121,8 @@ public class VisionGear extends Subsystem implements Config, PIDOutput{
 		double P = SmartDashboard.getNumber("kP");
 		double I = SmartDashboard.getNumber("kI");
 		double D = SmartDashboard.getNumber("kD");
-		double F = SmartDashboard.getNumber("kF");
-		
-		visionGearController.setPID(P, I, D, F);
+				
+		visionGearController.setPID(P, I, D);
 		
 	} 
 
@@ -241,8 +255,8 @@ public double currentCen() {
 		int thresh = 5; 	//threshold of pixels 
 		double dif;
 		
-		double rightTapePx = 198; 	//where right tape should be if centered
-		double leftTapePx = 76; 	//where left tape should be if centered
+		double rightTapePx = 138; 	//where right tape should be if centered
+		double leftTapePx = 87; 	//where left tape should be if centered
 		
 		double cen = 130;
 		
@@ -255,25 +269,25 @@ public double currentCen() {
 			defaultValue[0] = 0;
 			
 			
-			if (cenX.length < 2 && cenX.length != 0) {
+			if (cenX.length != 0 && cenX.length < 2) {
 				if (cenX[0] < 130) {
 					SmartDashboard.putString("current cen status", "cen[0] < 130");
-					cen = cenX[0] + 45;
+					cen = cenX[0] - 20;
 					SmartDashboard.putNumber("centerFromCode", cen);
 				} else {
 					SmartDashboard.putString("current cen status", "cen[0] !< 130");
-					cen = cenX[0] - 45;
+					cen = cenX[0] + 20;
 					SmartDashboard.putNumber("centerFromCode", cen);
 				}
 			} else {
-				if (cenX[0] > cenX[1] && cenX.length != 0) {
+				if (cenX.length != 0) {
 					SmartDashboard.putString("current cen status", "cen[0] > cen[1]");
-					cen = Math.abs(cenX[0] - cenX[1]) / 2 + cenX[1];
+					cen = (cenX[0] + cenX[1])/2;
 					SmartDashboard.putNumber("centerFromCode", cen);
-				} else  if (cenX[1] > cenX[0] && cenX.length != 0) {
+				/*} else  if (cenX.length != 0 && cenX[0] > cenX[1]) {
 					SmartDashboard.putString("current cen status", "cen[0] < cen[1]");
 					cen = Math.abs(cenX[0] - cenX[1]) / 2 + cenX[0];
-					SmartDashboard.putNumber("centerFromCode", cen);
+					SmartDashboard.putNumber("centerFromCode", cen);*/
 				}
 				
 				//cen is the px of the center between left and right tapes in picture
@@ -329,17 +343,19 @@ public double currentCen() {
 			height = RobotMap.gearTable.getNumberArray("height", defaultValue);
 			
 			
-			if (cenX.length < 2 && cenX.length != 0) {
+			if (cenX.length != 0 && cenX.length < 2) {
 				if (cenX[0] < 130) {
 					dif = rightTapePx - cenX[0];
 				} else {
 					dif = leftTapePx - cenX[0];
 				}
 			} else {
-				if (cenX[0] > cenX[1] && cenX.length != 0) {
+				if (cenX.length != 0 && cenX[0] > cenX[1]) {
 					cen = Math.abs(cenX[0] - cenX[1]) / 2 + cenX[1];
-				} else {
+				} else  if (cenX.length != 0) {
 					cen = Math.abs(cenX[0] - cenX[1]) / 2 + cenX[0];
+				} else {
+					cen = 1;
 				}
 				
 				//cen is the px of the center between left and right tapes in picture
@@ -347,7 +363,7 @@ public double currentCen() {
 				dif = 130 - cen;
 			}
 			
-			//SmartDashboard.putNumber("gear setpoint", dif);
+			SmartDashboard.putNumber("gear setpoint", dif);
 			
 			
 			//then strafe so they are both equal distance from center

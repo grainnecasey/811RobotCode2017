@@ -26,8 +26,8 @@ public class auto_hopper extends CommandGroup {
 	    	 * Activate hopper
 	    	 */
 	    	
-	    	addSequential(new drive_auto(10)); // TODO actually move to the hopper
-	    	//addSequential(new strafe_auto(1)); // TODO
+	    	addSequential(new drive_auto(-40));
+	    	addSequential(new strafe_auto(10)); //TODO
 	    }
 
 }

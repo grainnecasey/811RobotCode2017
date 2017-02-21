@@ -1,8 +1,13 @@
 package org.usfirst.frc.team811.robot.subsystems;
 
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.PIDController;
+import edu.wpi.first.wpilibj.PIDOutput;
+import edu.wpi.first.wpilibj.PIDSource;
+import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team811.robot.*;
 import org.usfirst.frc.team811.robot.commands.drive_w_joystick;
@@ -30,6 +35,8 @@ public class Drive extends Subsystem implements Config {
     
     boolean m_trackAngle = false;
     double m_lastAngle;
+    
+	double rotation = 0;
 
 	public void driveWithJoy() {
 	    	
@@ -134,6 +141,67 @@ public class Drive extends Subsystem implements Config {
 		
 	}
 
+	public void strafe_auto_dist(double output) {
+
+		
+		m_lastAngle= RobotMap.ahrs.getYaw();
+    	
+    	
+    	//RobotMap.driveEncoder.setDistancePerPulse(DRIVE_DISTANCE_PER_PULSE);
+		
+		//setTimeout(5);
+		//RobotMap.driveEncoder.reset();
+		RobotMap.drivebackright.setEncPosition(0);
+		RobotMap.drivebackright.reverseSensor(false);
+		
+		//RobotMap.driveEncoder.setReverseDirection(true);
+		//RobotMap.driveEncoder.setDistancePerPulse(1/40);
+		
+		//1 inch = 47.8 encoder ticks 
+		
+		//double encInches =  -1 * RobotMap.drivebackright.getEncPosition() / 47.8;
+
+          //proportional rotation injected to counter error
+		
+		
+		RobotMap.drivePID = new PIDController(.5, 0, .01, new PIDSource() {
+			
+			public double pidGet()
+			{
+				SmartDashboard.putNumber("Auto value",
+						RobotMap.drivebackright.getEncPosition() / 100);
+				return RobotMap.drivebackright.getEncPosition() / 100;
+			}
+			@Override
+			public void setPIDSourceType(PIDSourceType pidSource) {
+			}
+
+			@Override
+			public PIDSourceType getPIDSourceType() {
+				return PIDSourceType.kDisplacement;
+			}
+		}, new PIDOutput() {
+			public void pidWrite(double d) {
+				SmartDashboard.putNumber("pid loop d", -d);
+				double errVal= -(m_lastAngle-RobotMap.ahrs.getYaw());
+                double P=0.02;
+
+                rotation= P * errVal;
+				RobotMap.driveTrain.mecanumDrive_Cartesian(-d, 0, 0, 0);
+				SmartDashboard.putString("drive status", "in pidloop for driving");
+			}
+		});
+		RobotMap.drivebackright.setEncPosition(0);
+		RobotMap.drivePID.setAbsoluteTolerance(3);
+		RobotMap.drivePID.setSetpoint(output);
+		RobotMap.drivePID.setOutputRange(-.5, .5);
+		RobotMap.drivePID.setContinuous(true);
+		RobotMap.drivePID.enable();
+
+		SmartDashboard.putString("drive status", "drive forward auto"); 
+    	
+	}
+	
     
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.

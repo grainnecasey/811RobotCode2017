@@ -58,11 +58,11 @@ public interface Config {
 	int DRIVE_ENCODER_PORT_1 = 2;
 	int DRIVE_ENCODER_PORT_2 = 3;
 	
-	//Other Config
+	// Other Config
 	double AGITATOR_SPEED = .9;
 	double CLIMBER_SPEED = 1;
 	
-	//Turret Vision Config
+	// Turret Vision Config
 	double tkP = 0.01;
     double tkI = 0.00;
     double tkD = 0.4;
@@ -72,13 +72,13 @@ public interface Config {
 	int framesizeY = 195;
 	int framethres = 5;
 	
-	//Gear Vision Config
-	double gkP = 0.04;
-    double gkI = 0.00;
-    double gkD = 0.00;
-    double gkF = 0.00;
+	// Gear Vision Config
+	double gkP = 0.04;	//.0005
+    double gkI = 0.00;	//.0001
+    double gkD = 0.5;	//.01
+    double gkF = 0.00;	//0
     
-    //Lidar Config
+    // Lidar Config
     double SHOOTER_DIST_INCHES = 20; //TODO
-    
+        
 }

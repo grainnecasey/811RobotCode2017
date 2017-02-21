@@ -36,25 +36,51 @@ public class auto_gearshoot extends CommandGroup {
     	 * Shoot
     	 */
     	
-    	addSequential(new drive_auto(70));
-    	addSequential(new vision_strafe_auto());
-    	addSequential(new drive_auto(10));
+    	addSequential(new drive_auto(-80)); 
     	addSequential(new wait(2));
-    	addSequential(new drive_auto(-10));
     	
-    	if (RobotMap.ds.getLocation() == 1) {	//left (from driver perspective)
-    		addSequential(new strafe_auto(130));
+    	switch (RobotMap.gear_auto_pos) {
+    	case 1: 
+    		addSequential(new turn_auto(45));
+    		
+	    	addSequential(new vision_strafe_auto()); 
+	    	addSequential(new drive_auto(-13));
+	    	addSequential(new wait(2)); 
+	    	addSequential(new drive_auto(13));
+	    	addSequential(new strafe_auto(130));
     		addSequential(new drive_auto(64));
-    		//addSequential(new vision_shoot());
-    	} else if (RobotMap.ds.getLocation() == 2) {	//middle
-    		addSequential(new drive_auto(-24));
+    		addSequential(new shoot_compilation());
+    		break;
+    	case 2:
+    		addSequential(new turn_auto(0));
+    		//addSequential(new wait(2)); 
+	    	addSequential(new vision_strafe_auto()); 
+	    	addSequential(new drive_auto(-13)); 
+	    	addSequential(new wait(2)); 
+	    	addSequential(new drive_auto(-24));
     		addSequential(new strafe_auto(85));
     		//maybe rotate a bit to see
-    		//addSequential(new vision_shoot());
-    	} else if (RobotMap.ds.getLocation() == 3) {	//right (from driver perspective)
-    		addSequential(new drive_auto(-76));
-    		//addSequential(new turn_auto(90)); //rotate 90 degrees
-    		//addSequential(new vision_shoot());
+    		addSequential(new shoot_compilation());
+    		break;
+    	case 3:
+    		addSequential(new turn_auto(-45));
+    		//addSequential(new wait(2)); 
+	    	addSequential(new vision_strafe_auto()); 
+	    	addSequential(new drive_auto(-13)); 
+	    	addSequential(new wait(2)); 
+	    	addSequential(new drive_auto(13));
+	    	addSequential(new turn_auto(45));
+	    	addSequential(new strafe_auto(50));
+    		break;
+    	default:
+    		addSequential(new turn_auto(0));
+    		//addSequential(new wait(2)); 
+	    	addSequential(new vision_strafe_auto()); 
+	    	addSequential(new drive_auto(-13)); 
+	    	addSequential(new wait(2)); 
+	    	addSequential(new drive_auto(-76));
+    		addSequential(new turn_auto(90)); //rotate 90 degrees
+    		addSequential(new shoot_compilation());
     	}
     	
     }

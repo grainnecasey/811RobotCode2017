@@ -85,6 +85,8 @@ public class OI  implements Config{
 		SmartDashboard.putData("drive auto", new drive_auto(24));
 		SmartDashboard.putData("turn_auto(90)", new turn_auto(90));
 		SmartDashboard.putData("strafe_auto(24", new strafe_auto(12));
+		
+		SmartDashboard.putData("vision strafe auto 2", new vision_strafe_auto2());
 
 	}
     

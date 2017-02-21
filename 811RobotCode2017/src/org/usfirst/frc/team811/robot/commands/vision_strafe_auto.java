@@ -44,6 +44,7 @@ public class vision_strafe_auto extends Command {
     	Robot.visionGear.visionGearController.disable();
     	RobotMap.driveTrain.arcadeDrive(0, 0);
     	SmartDashboard.putString("gear vision status", "ended");
+    	//RobotMap.drivePID.disable();
     }
 
     // Called when another command which requires one or more of the same
@@ -52,5 +53,6 @@ public class vision_strafe_auto extends Command {
     	Robot.visionGear.visionGearController.disable();
     	RobotMap.driveTrain.arcadeDrive(0, 0);
     	SmartDashboard.putString("gear vision status", "ended");
+    	//RobotMap.drivePID.disable();
     }
 }

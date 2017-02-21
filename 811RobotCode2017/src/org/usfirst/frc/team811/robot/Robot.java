@@ -43,7 +43,8 @@ public class Robot extends IterativeRobot implements Config {
 	public static VisionGear visionGear;
 	
     Command autonomousCommand;
-    SendableChooser chooser;
+    SendableChooser<Command> autoChooser;
+    SendableChooser<Command> variableChooser;
     
 
     /**
@@ -68,13 +69,28 @@ public class Robot extends IterativeRobot implements Config {
 		geargrabber = new GearGrabber();
 		visionTurret = new VisionTurret();
 		visionGear = new VisionGear();
-        chooser = new SendableChooser();
-        chooser.addDefault("Drive Auto", new auto_base());
-        chooser.addObject("Gear Auto", new auto_gear());
-        // chooser.addObject("Vision Auto", new auto_shoot()); TODO
-        // chooser.addObject("Hopper Auto", new auto_hopper()); TODO
-        chooser.addObject("Nothing Auto", new auto_nothing());
-        SmartDashboard.putData("Auto Mode Chooser", chooser);
+        autoChooser = new SendableChooser<Command>();
+        autoChooser.addDefault("base line", new auto_base());
+        autoChooser.addObject("just gear", new auto_gear());
+        autoChooser.addObject("gear hopper", new auto_gearhopper());
+        autoChooser.addObject("gear shoot", new auto_gearshoot());
+        autoChooser.addObject("gear ready", new auto_gearready());
+        autoChooser.addObject("hopper", new auto_hopper());
+        autoChooser.addObject("shoot", new auto_shoot());
+        autoChooser.addObject("do nothing", new auto_nothing());
+        
+        
+        
+        
+        variableChooser = new SendableChooser<Command>();
+        variableChooser.addDefault("gear middle", new vari_gear_middle() );
+        variableChooser.addObject("Gear Right", new vari_gear_right());
+        //variableChooser.addObject("Gear Middle", new vari_gear_middle());
+        variableChooser.addObject("Gear Left", new vari_gear_left());
+
+        
+        SmartDashboard.putData("Auto Mode Chooser", autoChooser);
+        SmartDashboard.putData("Auto Variable Chooser", variableChooser);
         SmartDashboard.putNumber("manual center", 145);
 
         
@@ -108,7 +124,7 @@ public class Robot extends IterativeRobot implements Config {
 	 * or additional comparisons to the switch structure below with additional strings & commands.
 	 */
     public void autonomousInit() {
-        autonomousCommand = (Command) chooser.getSelected();
+        autonomousCommand = (Command) autoChooser.getSelected();
        //autonomousCommand.start();
         
 		/* String autoSelected = SmartDashboard.getString("Auto Selector", "Default");
@@ -156,7 +172,7 @@ public class Robot extends IterativeRobot implements Config {
         SmartDashboard.putNumber("gyro yaw value", RobotMap.ahrs.getYaw());
         SmartDashboard.putNumber("drive enc val", RobotMap.drivebackright.getEncPosition());
         SmartDashboard.putNumber("drive enc corrected dist", RobotMap.drivebackright.getEncPosition() / DRIVE_DISTANCE_PER_PULSE);
-        
+        SmartDashboard.putNumber("gear auto pos", RobotMap.gear_auto_pos);
 
 
     }

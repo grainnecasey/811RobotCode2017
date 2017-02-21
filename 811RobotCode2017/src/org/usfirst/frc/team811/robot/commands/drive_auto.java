@@ -82,6 +82,7 @@ public class drive_auto extends Command implements Config {
 		
 		SmartDashboard.putNumber("driveget error", RobotMap.drivePID.getError());
 		SmartDashboard.putNumber("drive get setpoint", RobotMap.drivePID.getSetpoint());
+
 		//Robot.drive.driveAuto(distance);
 		
 	}
