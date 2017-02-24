@@ -20,6 +20,8 @@ public class vision_strafe_auto extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	Robot.visionGear.visionGearController.reset();
+    	RobotMap.ahrs.reset();
     	Robot.visionGear.strafeTunePID();
     	SmartDashboard.putString("gear vision status", "initializing");
     	Robot.visionGear.gearStrafeCenter();
@@ -36,7 +38,7 @@ public class vision_strafe_auto extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	return false;//Robot.visionGear.visionGearController.onTarget();
+    	return Robot.visionGear.visionGearController.onTarget();
     }
 
     // Called once after isFinished returns true

@@ -88,7 +88,7 @@ public class VisionGear extends Subsystem implements Config, PIDOutput{
 	public PIDController visionGearController = RobotMap.visionGearController;
 
 	double rotateToAngleRate;
-	double kTolerancePx = 5;
+	double kTolerancePx = 10;
 
 	/* The following PID Controller coefficients will need to be tuned */
 	/* to match the dynamics of your drive system. Note that the */
@@ -103,8 +103,8 @@ public class VisionGear extends Subsystem implements Config, PIDOutput{
 		visionGearController = new PIDController(gkP, gkI, gkD, camSource,
 				(PIDOutput) this);
 			//SmartDashboard.putData((NamedSendable) RobotMap.turnController);
-			visionGearController.setInputRange(0, 260);
-			visionGearController.setOutputRange(-.5, .5);
+			visionGearController.setInputRange(-130, 130);
+			visionGearController.setOutputRange(-.3, .3);
 			visionGearController.setAbsoluteTolerance(kTolerancePx);
 			visionGearController.setContinuous(true);
 			visionGearController.setSetpoint(0.0);
@@ -261,6 +261,7 @@ public double currentCen() {
 		double cen = 130;
 		
 		cenX = RobotMap.gearTable.getNumberArray("centerX", defaultValue);
+		width = RobotMap.gearTable.getNumberArray("width", defaultValue);
 		
 		
 		//input will be the number of pixels it has to move to whatever side
@@ -270,13 +271,21 @@ public double currentCen() {
 			
 			
 			if (cenX.length != 0 && cenX.length < 2) {
-				if (cenX[0] < 130) {
+				if (cenX[0] < 65) {
+					SmartDashboard.putString("current cen status", "cen[0] < 65");
+					cen = cenX[0] - (.5 * width[0]) - width[0];
+					SmartDashboard.putNumber("centerFromCode", cen);
+				} else if (cenX[0] < 130){
 					SmartDashboard.putString("current cen status", "cen[0] < 130");
-					cen = cenX[0] - 20;
+					cen = cenX[0] + (.5 * width[0]) + width[0];
+					SmartDashboard.putNumber("centerFromCode", cen);
+				} else if (cenX[0] < 195) {
+					SmartDashboard.putString("current cen status", "cen[0] < 195");
+					cen = cenX[0] - (.5 * width[0]) - width[0];
 					SmartDashboard.putNumber("centerFromCode", cen);
 				} else {
-					SmartDashboard.putString("current cen status", "cen[0] !< 130");
-					cen = cenX[0] + 20;
+					SmartDashboard.putString("current cen status", "cen[0] < 260");
+					cen = cenX[0] + (.5 * width[0]) + width[0];
 					SmartDashboard.putNumber("centerFromCode", cen);
 				}
 			} else {
@@ -295,6 +304,12 @@ public double currentCen() {
 				//dif = 130 - cen;
 			}
 			
+			if (cen > 260) {
+				cen = 260;
+			} else if (cen < 0) {
+				cen = 0;
+			}
+			
 			
 
 		} catch (RuntimeException ex) {
@@ -307,7 +322,7 @@ public double currentCen() {
 		SmartDashboard.putNumber("current center", cen);
 		count2++;
 		SmartDashboard.putNumber("count 2", count2);
-		return cen;
+		return cen - 130;
 		
 
 	}
@@ -360,7 +375,7 @@ public double currentCen() {
 				
 				//cen is the px of the center between left and right tapes in picture
 				
-				dif = 130 - cen;
+				dif = cen;
 			}
 			
 			SmartDashboard.putNumber("gear setpoint", dif);
@@ -377,7 +392,7 @@ public double currentCen() {
 			throw ex;  // rethrow the exception - hopefully it gets displayed
 		}
 		
-		visionGearController.setSetpoint(130);
+		visionGearController.setSetpoint(0);
 		SmartDashboard.putNumber("gear setpoint", visionGearController.getSetpoint());
 		visionGearController.enable();
 		

@@ -59,8 +59,7 @@ public class OI  implements Config{
 		//Smart Dashboard Buttons
 		SmartDashboard.putData("agitator_off", new agitator_off());
 		SmartDashboard.putData("agitator_on", new agitator_on());
-		SmartDashboard.putData("climb_down", new climb_down());
-		SmartDashboard.putData("climb_up", new climb_up());
+		SmartDashboard.putData("climb_up", new climb_joy_control());
 		SmartDashboard.putData("gear_down", new gear_down());
 		SmartDashboard.putData("gear_up", new gear_up());
 		SmartDashboard.putData("intake_backspin", new intake_backspin());

@@ -98,11 +98,11 @@ public class RobotMap implements Config {
         
         
         
-        //driveEncoder = new Encoder(DRIVE_ENCODER_PORT_1, DRIVE_ENCODER_PORT_2);
+        //driveEncoder = new Encoder(DRIVE_ENCODER_PORT_1, DRIVE_ENCODER_PORT_2);9 nik
         //driveEncoder.setReverseDirection(false);
         //driveEncoder.setDistancePerPulse(DRIVE_DISTANCE_PER_PULSE);
         
-        gear_auto_pos = 1;
+        gear_auto_pos = 3;
         
         turretTable = NetworkTable.getTable("GRIP/811Contour");
         gearTable = NetworkTable.getTable("GRIP/811GearContours");

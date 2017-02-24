@@ -7,9 +7,9 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class climb_down extends Command {
+public class climb_joy_control extends Command {
 
-    public climb_down() {
+    public climb_joy_control() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(Robot.climber);
@@ -21,7 +21,7 @@ public class climb_down extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.climber.climbDown();
+    	Robot.climber.climbWithJoy();
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -31,12 +31,12 @@ public class climb_down extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.climber.climbOff();
+    	//Robot.climber.climbOff();
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	Robot.climber.climbOff();
+    	//Robot.climber.climbOff();
     }
 }

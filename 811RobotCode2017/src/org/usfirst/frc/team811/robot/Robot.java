@@ -93,7 +93,7 @@ public class Robot extends IterativeRobot implements Config {
         SmartDashboard.putData("Auto Variable Chooser", variableChooser);
         SmartDashboard.putNumber("manual center", 145);
 
-        
+        SmartDashboard.putNumber("gear choice", 2);
         oi = new OI();
        
         
@@ -137,6 +137,8 @@ public class Robot extends IterativeRobot implements Config {
 			autonomousCommand = new ExampleCommand();
 			break;
 		} */
+        
+        RobotMap.gear_auto_pos = (int) SmartDashboard.getInt("gear choice");
     	
     	// schedule the autonomous command (example)
         if (autonomousCommand != null) autonomousCommand.start();

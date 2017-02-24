@@ -2,11 +2,13 @@ package org.usfirst.frc.team811.robot.subsystems;
 
 import org.usfirst.frc.team811.robot.Config;
 import org.usfirst.frc.team811.robot.RobotMap;
+import org.usfirst.frc.team811.robot.commands.climb_joy_control;
 
 import com.ctre.CANTalon;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Relay;
+import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -23,7 +25,7 @@ public class Climber extends Subsystem implements Config {
 
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
-        //setDefaultCommand(new MySpecialCommand());
+        setDefaultCommand(new climb_joy_control());
     }
     
     public void climbUp() {
@@ -38,6 +40,15 @@ public class Climber extends Subsystem implements Config {
     	climber.set(-CLIMBER_SPEED);
     }
     		
-    
+    public void climbWithJoy(){
+    	if(joy2.getRawAxis(CLIMBER_AXIS) < -.2){
+    		
+    	}else if(joy2.getRawAxis(CLIMBER_AXIS) > .2){
+    		climber.set(joy2.getRawAxis(CLIMBER_AXIS));
+    	}else{
+    		climber.set(0);
+    	}
+    	
+    }
 }
 

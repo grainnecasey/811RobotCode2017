@@ -38,6 +38,9 @@ public interface Config {
 	int INTAKE_IN_BUTTON = 5;
 	int INTAKE_OFF_BUTTON = 6;
 	
+	//climber control
+	int CLIMBER_AXIS = 1;
+	
 	// Gear Grabber Control
 	int GEAR_GRABBER_UP_BUTTON = 1;
 	int GEAR_GRABBER_DOWN_BUTTON = 3;
@@ -59,7 +62,7 @@ public interface Config {
 	int DRIVE_ENCODER_PORT_2 = 3;
 	
 	// Other Config
-	double AGITATOR_SPEED = .9;
+	double AGITATOR_SPEED = 1;
 	double CLIMBER_SPEED = 1;
 	
 	// Turret Vision Config
@@ -73,9 +76,9 @@ public interface Config {
 	int framethres = 5;
 	
 	// Gear Vision Config
-	double gkP = 0.04;	//.0005
-    double gkI = 0.00;	//.0001
-    double gkD = 0.5;	//.01
+	double gkP = 0.0009;	//.0005
+    double gkI = 0.001;	//.0001
+    double gkD = 0.1;	//.01
     double gkF = 0.00;	//0
     
     // Lidar Config
