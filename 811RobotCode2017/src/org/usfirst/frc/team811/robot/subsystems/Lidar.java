@@ -6,13 +6,15 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.I2C.Port;
+import edu.wpi.first.wpilibj.PIDSource;
+import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.SensorBase;
 import edu.wpi.first.wpilibj.Timer;
 
  
 
 
-public class Lidar extends Subsystem{
+public class Lidar extends Subsystem implements PIDSource{
 
 	
 private I2C i2c;
@@ -200,6 +202,20 @@ public double pidGet() {
 	protected void initDefaultCommand() {
 		// TODO Auto-generated method stub
 		
+	}
+
+
+	@Override
+	public void setPIDSourceType(PIDSourceType pidSource) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public PIDSourceType getPIDSourceType() {
+		// TODO Auto-generated method stub
+		return PIDSourceType.kDisplacement;
 	}
 
 	}

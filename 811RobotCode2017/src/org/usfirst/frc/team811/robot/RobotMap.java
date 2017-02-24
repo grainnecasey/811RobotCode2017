@@ -56,6 +56,7 @@ public class RobotMap implements Config {
     public static PIDController drivePID;
     public static PIDController visionTurretController;
     public static PIDController visionGearController;
+    public static PIDController lidarPID;
     
     public static NetworkTable turretTable;
     public static NetworkTable gearTable;

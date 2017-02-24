@@ -13,6 +13,8 @@ import org.usfirst.frc.team811.robot.subsystems.Climber;
 import org.usfirst.frc.team811.robot.subsystems.Drive;
 import org.usfirst.frc.team811.robot.subsystems.GearGrabber;
 import org.usfirst.frc.team811.robot.subsystems.IntakeBall;
+import org.usfirst.frc.team811.robot.subsystems.Lidar;
+import org.usfirst.frc.team811.robot.subsystems.LidarController;
 import org.usfirst.frc.team811.robot.subsystems.Shooter;
 import org.usfirst.frc.team811.robot.subsystems.VisionGear;
 import org.usfirst.frc.team811.robot.subsystems.VisionTurret;
@@ -41,6 +43,7 @@ public class Robot extends IterativeRobot implements Config {
 	public static GearGrabber geargrabber;
 	public static VisionTurret visionTurret;
 	public static VisionGear visionGear;
+	public static LidarController lidarController;
 	
     Command autonomousCommand;
     SendableChooser<Command> autoChooser;
@@ -69,6 +72,8 @@ public class Robot extends IterativeRobot implements Config {
 		geargrabber = new GearGrabber();
 		visionTurret = new VisionTurret();
 		visionGear = new VisionGear();
+		lidarController = new LidarController();
+		
         autoChooser = new SendableChooser<Command>();
         autoChooser.addDefault("base line", new auto_base());
         autoChooser.addObject("just gear", new auto_gear());
