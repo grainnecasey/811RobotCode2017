@@ -33,28 +33,28 @@ public class auto_gear extends CommandGroup {
 	    	
 	    	switch (RobotMap.gear_auto_pos) {
 	    	case 1: 
-	    		addSequential(new drive_auto(-90)); 
+	    		addSequential(new drive_auto(-90)); //-90
 		    	//addSequential(new wait(2));
-	    		addSequential(new turn_auto(-50));
-	    		//addSequential(new wait(2)); 
-		    	//addSequential(new vision_strafe_auto()); 
-		    	addSequential(new drive_auto(-35)); 
-	    		break;
-	    	case 2:
-	    		addSequential(new drive_auto(-58)); 
-		    	//addSequential(new wait(2));
-	    		//addSequential(new turn_auto(0));
+	    		addSequential(new turn_auto(-57));
 	    		//addSequential(new wait(2)); 
 		    	addSequential(new vision_strafe_auto()); 
 		    	addSequential(new drive_auto(-28)); 
 	    		break;
-	    	case 3:
-	    		addSequential(new drive_auto(-97)); 
+	    	case 2:
+	    		addSequential(new drive_auto(-50)); //-50
 		    	//addSequential(new wait(2));
-	    		addSequential(new turn_auto(50));
+	    		//addSequential(new turn_auto(0));
 	    		//addSequential(new wait(2)); 
 		    	addSequential(new vision_strafe_auto()); 
-		    	addSequential(new drive_auto(-45)); 
+		    	addSequential(new drive_auto(-30)); 
+	    		break;
+	    	case 3:
+	    		addSequential(new drive_auto(-90)); //97
+		    	//addSequential(new wait(2));
+	    		addSequential(new turn_auto(57));//50
+	    		//addSequential(new wait(2)); 
+		    	addSequential(new vision_strafe_auto()); 
+		    	addSequential(new drive_auto(-28)); //47
 	    		break;
 	    	default:
 	    		addSequential(new drive_auto(-58)); 

@@ -118,11 +118,11 @@ public class VisionGear extends Subsystem implements Config, PIDOutput{
 	}
 
 	public void strafeTunePID() {
-		double P = SmartDashboard.getNumber("kP");
-		double I = SmartDashboard.getNumber("kI");
-		double D = SmartDashboard.getNumber("kD");
+		//double P = SmartDashboard.getNumber("kP");
+		//double I = SmartDashboard.getNumber("kI");
+		//double D = SmartDashboard.getNumber("kD");
 				
-		visionGearController.setPID(P, I, D);
+		//visionGearController.setPID(P, I, D);
 		
 	} 
 
@@ -200,11 +200,11 @@ public class VisionGear extends Subsystem implements Config, PIDOutput{
 		// while(temp)
 		// {
 
-		if (cenX[indexOfContour()] < 130 - framethres) {
+		if (cenX[indexOfContour()] < 180 - framethres) {
 			SmartDashboard.putString("Position X", "Left");
 			driveTrain.arcadeDrive(0, 0.45);
 			// turn = 1;
-		} else if (cenX[indexOfContour()] > 130 + framethres) {
+		} else if (cenX[indexOfContour()] > 180 + framethres) {
 			SmartDashboard.putString("Position X", "Right");
 			driveTrain.arcadeDrive(0, -0.45);
 			// turn = 2;
@@ -258,7 +258,7 @@ public double currentCen() {
 		double rightTapePx = 138; 	//where right tape should be if centered
 		double leftTapePx = 87; 	//where left tape should be if centered
 		
-		double cen = 130;
+		double cen = 180;
 		
 		cenX = RobotMap.gearTable.getNumberArray("centerX", defaultValue);
 		width = RobotMap.gearTable.getNumberArray("width", defaultValue);
@@ -275,11 +275,11 @@ public double currentCen() {
 					SmartDashboard.putString("current cen status", "cen[0] < 65");
 					cen = cenX[0] - (.5 * width[0]) - width[0];
 					SmartDashboard.putNumber("centerFromCode", cen);
-				} else if (cenX[0] < 130){
+				} else if (cenX[0] < 180){
 					SmartDashboard.putString("current cen status", "cen[0] < 130");
 					cen = cenX[0] + (.5 * width[0]) + width[0];
 					SmartDashboard.putNumber("centerFromCode", cen);
-				} else if (cenX[0] < 195) {
+				} else if (cenX[0] < 200) {
 					SmartDashboard.putString("current cen status", "cen[0] < 195");
 					cen = cenX[0] - (.5 * width[0]) - width[0];
 					SmartDashboard.putNumber("centerFromCode", cen);
@@ -322,7 +322,7 @@ public double currentCen() {
 		SmartDashboard.putNumber("current center", cen);
 		count2++;
 		SmartDashboard.putNumber("count 2", count2);
-		return cen - 130;
+		return cen - 180;
 		
 
 	}

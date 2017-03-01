@@ -24,7 +24,7 @@ public class Agitator extends Subsystem implements Config{
     }
     
     public void agOn() {
-    	agitator.set(-AGITATOR_SPEED);
+    	agitator.set(AGITATOR_SPEED);
     }
     
     public void agOff() {

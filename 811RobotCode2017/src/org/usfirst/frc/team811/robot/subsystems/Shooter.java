@@ -66,8 +66,8 @@ public class Shooter extends Subsystem implements Config {
     	double speedR = SmartDashboard.getNumber("shoot right speed", SHOOTER_SPEED);
     	
     	shootingTime = System.currentTimeMillis();
-    	shooterTalon1.set(speedL);
-    	shooterTalon2.set(-speedR);
+    	shooterTalon1.set(.7);
+    	shooterTalon2.set(-.7);
     	
     	//while (shootingTime + 3000 > System.currentTimeMillis()) {
     		

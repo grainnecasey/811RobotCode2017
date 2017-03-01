@@ -48,8 +48,8 @@ public class drive_auto extends Command implements Config {
 			public double pidGet()
 			{
 				SmartDashboard.putNumber("Auto value",
-						-1 * RobotMap.drivebackright.getEncPosition() / 47.8);
-				return -1 * RobotMap.drivebackright.getEncPosition() / 47.8;
+						-1 * RobotMap.drivebackright.getEncPosition() / 53.2);	//47.8 beta
+				return -1 * RobotMap.drivebackright.getEncPosition() / 53.2;
 			}
 			@Override
 			public void setPIDSourceType(PIDSourceType pidSource) {

@@ -69,6 +69,8 @@ public class OI  implements Config{
 		SmartDashboard.putData("shoot_stop", new shoot_stop());
 		SmartDashboard.putData("vision_turn_auto", new vision_turn_auto());
 		SmartDashboard.putData("shoot_load", new shoot_load());
+		SmartDashboard.putData("lidar_start", new lidar_start());
+		SmartDashboard.putData("lidar_stop", new lidar_stop());
 		
 		//auto
 		SmartDashboard.putData("auto_base", new auto_base());

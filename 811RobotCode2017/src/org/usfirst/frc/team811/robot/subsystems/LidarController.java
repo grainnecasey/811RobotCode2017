@@ -20,7 +20,7 @@ public class LidarController extends Subsystem implements Config, PIDOutput{
 	
 	RobotDrive driveTrain = RobotMap.driveTrain;
 	public PIDController lidarPID = RobotMap.lidarPID;
-	Lidar lidar = new Lidar();
+	public Lidar lidar = new Lidar();
 	
 	double lidarTolerance = 3; //TODO
 	double m_lastAngle = 0;

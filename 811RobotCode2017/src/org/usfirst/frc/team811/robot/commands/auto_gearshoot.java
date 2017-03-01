@@ -70,7 +70,7 @@ public class auto_gearshoot extends CommandGroup {
 	    	addSequential(new wait(2)); 
 	    	addSequential(new drive_auto(13));
 	    	addSequential(new turn_auto(45));
-	    	addSequential(new strafe_auto(50));
+	    	addSequential(new lidar_to_distance()); //TODO
     		break;
     	default:
     		addSequential(new turn_auto(0));
