@@ -42,7 +42,7 @@ public class Climber extends Subsystem implements Config {
     		
     public void climbWithJoy(){
     	if(joy2.getRawAxis(CLIMBER_AXIS) < -.2){
-    		
+    		climber.set(joy2.getRawAxis(CLIMBER_AXIS)); //added this for testing to make the climber go backwards - Dan Czz
     	}else if(joy2.getRawAxis(CLIMBER_AXIS) > .2){
     		climber.set(joy2.getRawAxis(CLIMBER_AXIS));
     	}else{

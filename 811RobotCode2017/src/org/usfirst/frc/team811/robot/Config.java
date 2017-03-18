@@ -6,7 +6,7 @@ public interface Config {
     
     
     // CANTalons
-    int TURRET_PORT = 9;
+    //int TURRET_PORT = 9;
     int INTAKE_BALL_PORT = 2;
     int FRONT_LEFT_PORT = 6;
     int REAR_LEFT_PORT = 8;
@@ -18,11 +18,13 @@ public interface Config {
     int CLIMBER_PORT = 5;
     
     //Other Ports
+    int GEAR_INTAKE_PORT = 9;
     int GEAR_GRABBER_PORT = 9;
     int LOADER_RELAY_PORT = 0;
     int GEAR_TOP_LIMIT_PORT = 2;
     int GEAR_BOTTOM_LIMIT_PORT = 1;
     int AGITATOR_PORT = 5;
+    int BETA_BOT_IO_PORT = 0; //TODO
 	
     // Drive Controls
     int DRIVE_X_JOYSTICK_AXIS = 4;
@@ -31,7 +33,7 @@ public interface Config {
     int DRIVE_STRAFING_LEFT_JOYSTICK_AXIS = 2;
     
     // Drive Config
-    double DRIVE_DISTANCE_PER_PULSE = 82.6;
+    double DRIVE_DISTANCE_PER_PULSE = 52.6;
     
     // Intake Ball Controls
 	double INTAKE_SPEED = .7; 
@@ -41,10 +43,17 @@ public interface Config {
 	//climber control
 	int CLIMBER_AXIS = 1;
 	
-	// Gear Grabber Control
+	//agetator control
+	
+	int AG_AXIS = 5;
+	
+	// Gear Controls
+	int GEAR_INTAKE_OUT_AXIS = 3;
+	int GEAR_INTAKE_IN_AXIS = 2;
 	int GEAR_GRABBER_UP_BUTTON = 1;
 	int GEAR_GRABBER_DOWN_BUTTON = 3;
 	double GEAR_GRAB_SPEED = .7;
+	double GEAR_INTAKE_SPEED = 1;
 	
     // Shooter/Turret Controls
     int SHOOTER_BUTTON = 6;
@@ -54,7 +63,7 @@ public interface Config {
     // Shooter Config
 	double SHOOTER_FULL_SPEED_RATE = 20;
 	int SHOOTER_DISTANCE_PER_PULSE = 260;
-	int SHOOTER_SPEED = 1;
+	double SHOOTER_SPEED = .7;
 	double SHOOTER_END_WAIT_TIME = 50;
 	
 	// Drive Encoder Config
@@ -83,5 +92,6 @@ public interface Config {
     
     // Lidar Config
     double SHOOTER_DIST_INCHES = 20; //TODO
+    
         
 }

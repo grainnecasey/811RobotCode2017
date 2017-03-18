@@ -25,6 +25,8 @@ public class Shooter extends Subsystem implements Config {
 	
 
 	
+	double shootSpeed = .7;
+	
 	boolean shooting = false;
 	double shootingTime = 0;
 	double shootingEndTime = 0;
@@ -36,6 +38,9 @@ public class Shooter extends Subsystem implements Config {
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
+    	if (RobotMap.betaBot.get() == false) {
+    		shootSpeed = 1;
+    	}
     }
     
     public void shootWithJoy() {
@@ -62,12 +67,9 @@ public class Shooter extends Subsystem implements Config {
     
     public void shoot() {
     	
-    	double speedL = SmartDashboard.getNumber("shoot left speed", SHOOTER_SPEED);
-    	double speedR = SmartDashboard.getNumber("shoot right speed", SHOOTER_SPEED);
-    	
     	shootingTime = System.currentTimeMillis();
-    	shooterTalon1.set(.7);
-    	shooterTalon2.set(-.7);
+    	shooterTalon1.set(shootSpeed);
+    	shooterTalon2.set(-shootSpeed);
     	
     	//while (shootingTime + 3000 > System.currentTimeMillis()) {
     		

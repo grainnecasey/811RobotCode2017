@@ -127,13 +127,39 @@ public class VisionGear extends Subsystem implements Config, PIDOutput{
 	} 
 
 
-	public int indexOfContour() {
+	public int[] indexOfContour() {
+		defaultValue[0] = 172;
+		
 		height = RobotMap.gearTable.getNumberArray("height", defaultValue);	//changed to gear one
 		width = RobotMap.gearTable.getNumberArray("width", defaultValue);	//changed to gear one
 
+		int[] gearContours = new int[2];
+		gearContours[0] = -1;
+		gearContours[1] = -1;
+		
+		//width = 40
+		//height = 111
+
+		int wthresh = 10;
+		int hthresh = 5;
+		int j = 0;
+		for (int i = 0; i < height.length; i++) {
+			if ((height[i] < (111 + hthresh)) && (height[i] > (111 - hthresh))) {
+				if ((width[i] < (40 + wthresh)) && (width[i] < (40 - wthresh))) {
+					if (j < 2) {
+						gearContours[j] = i;
+						j++;
+					}
+					
+				}
+			}
+		}
+		
+		return gearContours;
+		
 		// need to worry about what happens when there is no target
 		// what should be returned - maybe -1
-		boolean targetLost = height.length == 0 || width.length == 0;
+		/*boolean targetLost = height.length == 0 || width.length == 0;
 		if (targetLost) {
 			SmartDashboard.putString("target Status", "no contours");
 			return -1;
@@ -187,50 +213,20 @@ public class VisionGear extends Subsystem implements Config, PIDOutput{
 
 		return index;
 		
-		
+		*/
 
 	}
 
-	public void positionX() {
-		defaultValue[0] = 0;
-		cenX = RobotMap.gearTable.getNumberArray("centerX", defaultValue);
-		area = RobotMap.gearTable.getNumberArray("area", defaultValue);
-		boolean temp = true;
-		int turn = 0; // 0 = center, 1 = right, 2 = left
-		// while(temp)
-		// {
-
-		if (cenX[indexOfContour()] < 180 - framethres) {
-			SmartDashboard.putString("Position X", "Left");
-			driveTrain.arcadeDrive(0, 0.45);
-			// turn = 1;
-		} else if (cenX[indexOfContour()] > 180 + framethres) {
-			SmartDashboard.putString("Position X", "Right");
-			driveTrain.arcadeDrive(0, -0.45);
-			// turn = 2;
-		} else {
-			SmartDashboard.putString("Position X", "Center");
-			// if (turn == 1) {
-			// driveTrain.arcadeDrive(0, -.5);
-			// } else if (turn == 2) {
-			// driveTrain.arcadeDrive(0, -.57);
-			// }
-			driveTrain.arcadeDrive(0, 0);
-			temp = false;
-			
-		}
-
-	}
-
+	
 	public boolean isCentered() {
 
-		// defaultValue[0] = 0;
+		defaultValue[0] = 172;
 		cenX = RobotMap.gearTable.getNumberArray("centerX", defaultValue);
 		// area = RobotMap.gearTable.getNumberArray("area", defaultValue);
 		// boolean temp = true;
 		// while(temp)
 		// {
-		int indexOfTarget = indexOfContour();
+		int indexOfTarget = 1;//indexOfContour();
 		// if the index is -1 - the target was lost
 		if (indexOfTarget == -1) {
 			SmartDashboard.putBoolean("is centered", false);
@@ -259,10 +255,11 @@ public double currentCen() {
 		double leftTapePx = 87; 	//where left tape should be if centered
 		
 		double cen = 180;
-		
+		defaultValue[0] = 172;
 		cenX = RobotMap.gearTable.getNumberArray("centerX", defaultValue);
 		width = RobotMap.gearTable.getNumberArray("width", defaultValue);
 		
+		int[] gearContours = indexOfContour();
 		
 		//input will be the number of pixels it has to move to whatever side
 		
@@ -270,28 +267,28 @@ public double currentCen() {
 			defaultValue[0] = 0;
 			
 			
-			if (cenX.length != 0 && cenX.length < 2) {
-				if (cenX[0] < 65) {
+			if (gearContours.length != 0 && gearContours[1] == -1 && gearContours[0] != -1) {
+				if (cenX[gearContours[0]] < 65) {
 					SmartDashboard.putString("current cen status", "cen[0] < 65");
-					cen = cenX[0] - (.5 * width[0]) - width[0];
+					cen = cenX[gearContours[0]] - (.5 * width[gearContours[0]]) - width[gearContours[0]];
 					SmartDashboard.putNumber("centerFromCode", cen);
-				} else if (cenX[0] < 180){
+				} else if (cenX[gearContours[0]] < 180){
 					SmartDashboard.putString("current cen status", "cen[0] < 130");
-					cen = cenX[0] + (.5 * width[0]) + width[0];
+					cen = cenX[gearContours[0]] + (.5 * width[0]) + width[0];
 					SmartDashboard.putNumber("centerFromCode", cen);
-				} else if (cenX[0] < 200) {
+				} else if (cenX[gearContours[0]] < 200) {
 					SmartDashboard.putString("current cen status", "cen[0] < 195");
-					cen = cenX[0] - (.5 * width[0]) - width[0];
+					cen = cenX[gearContours[0]] - (.5 * width[gearContours[0]]) - width[gearContours[0]];
 					SmartDashboard.putNumber("centerFromCode", cen);
 				} else {
 					SmartDashboard.putString("current cen status", "cen[0] < 260");
-					cen = cenX[0] + (.5 * width[0]) + width[0];
+					cen = cenX[gearContours[0]] + (.5 * width[gearContours[0]]) + width[gearContours[0]];
 					SmartDashboard.putNumber("centerFromCode", cen);
 				}
 			} else {
-				if (cenX.length != 0) {
+				if (gearContours.length != 0 && gearContours[1] != -1 && gearContours[0] != -1) {
 					SmartDashboard.putString("current cen status", "cen[0] > cen[1]");
-					cen = (cenX[0] + cenX[1])/2;
+					cen = (cenX[gearContours[0]] + cenX[gearContours[1]])/2;
 					SmartDashboard.putNumber("centerFromCode", cen);
 				/*} else  if (cenX.length != 0 && cenX[0] > cenX[1]) {
 					SmartDashboard.putString("current cen status", "cen[0] < cen[1]");
@@ -342,7 +339,7 @@ public double currentCen() {
 		
 		try {
 
-			int indexOfTarget = indexOfContour();
+			int indexOfTarget = 1;//indexOfContour();
 			// if the index is -1 - the target was lost
 			//if (indexOfTarget == -1) {
 				// what should the robot do?
@@ -353,7 +350,7 @@ public double currentCen() {
 
 			// double currentRotationRate;
 
-			defaultValue[0] = 0;
+			defaultValue[0] = 172;
 			cenX = RobotMap.gearTable.getNumberArray("centerX", defaultValue);
 			height = RobotMap.gearTable.getNumberArray("height", defaultValue);
 			

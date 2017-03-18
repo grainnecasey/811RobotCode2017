@@ -26,6 +26,8 @@ public class OI  implements Config{
 	JoystickButton shoot_off;
 	JoystickButton intake_off;
 	JoystickButton vision;
+	JoystickButton agForward;
+	JoystickButton agReverse;
 	
 	public OI() {
 		
@@ -40,12 +42,6 @@ public class OI  implements Config{
 		gear_vision = new JoystickButton(RobotMap.joystick1, 1);
 		gear_vision.whenPressed(new vision_strafe_auto());
 		
-		//gear_grabber_up = new JoystickButton(RobotMap.joystick2, 2);
-		//gear_grabber_up.whileHeld(new gear_up());
-
-		//gear_grabber_down = new JoystickButton(RobotMap.joystick2, 6); //TODO
-		//gear_grabber_down.whileHeld(new gear_down());
-		
 		shoot_manual = new JoystickButton(RobotMap.joystick2, 8);
 		shoot_manual.whenPressed(new shoot_comp_man());
 		
@@ -54,6 +50,12 @@ public class OI  implements Config{
 		
 		shoot_off = new JoystickButton(RobotMap.joystick2, 4);
 		shoot_off.whenPressed(new shoot_comp_stop());
+		
+		agForward = new JoystickButton(RobotMap.joystick2, 5);
+		agForward.whileHeld(new agForward());
+		
+		agReverse = new JoystickButton(RobotMap.joystick2, 6);
+		agReverse.whileHeld(new afReverse());
 		
 		
 		//Smart Dashboard Buttons
@@ -83,7 +85,7 @@ public class OI  implements Config{
 		
 		SmartDashboard.putData("vision strafe auto", new vision_strafe_auto());
 		
-		SmartDashboard.putData("drive auto", new drive_auto(24));
+		SmartDashboard.putData("drive auto", new drive_auto(48));
 		SmartDashboard.putData("turn_auto(90)", new turn_auto(90));
 		SmartDashboard.putData("strafe_auto(24", new strafe_auto(12));
 		

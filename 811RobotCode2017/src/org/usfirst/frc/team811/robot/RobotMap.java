@@ -42,6 +42,8 @@ public class RobotMap implements Config {
     public static CANTalon intakeBall;
     
     public static Victor agitator;
+    
+    public static CANTalon gearIntake;
     public static Victor gearGrabber;
     
     public static Victor turretLoader;
@@ -63,6 +65,8 @@ public class RobotMap implements Config {
     
     public static DriverStation ds = DriverStation.getInstance();
     
+    public static DigitalInput betaBot;
+    
     public static int gear_auto_pos;
     
     
@@ -81,10 +85,11 @@ public class RobotMap implements Config {
         driveTrain.setInvertedMotor(RobotDrive.MotorType.kFrontRight, true);
         driveTrain.setInvertedMotor(RobotDrive.MotorType.kRearRight, true);
         ahrs = new AHRS(SerialPort.Port.kMXP);
-        turret = new CANTalon(TURRET_PORT);
-        turret.setFeedbackDevice(FeedbackDevice.AnalogPot);
+        //turret = new CANTalon(TURRET_PORT);
+        //turret.setFeedbackDevice(FeedbackDevice.AnalogPot);
         intakeBall = new CANTalon(INTAKE_BALL_PORT);
         gearGrabber = new Victor(GEAR_GRABBER_PORT);
+        gearIntake = new CANTalon(GEAR_INTAKE_PORT);
         gearTopLimit = new DigitalInput(GEAR_TOP_LIMIT_PORT);
         gearBottomLimit = new DigitalInput(GEAR_BOTTOM_LIMIT_PORT);
         shootertalon1 = new CANTalon(RIGHT_SHOOTER_PORT);
@@ -97,13 +102,15 @@ public class RobotMap implements Config {
         climber = new CANTalon(CLIMBER_PORT);
         agitator = new Victor(AGITATOR_PORT);
         
+        betaBot = new DigitalInput(BETA_BOT_IO_PORT);
+        
         
         
         //driveEncoder = new Encoder(DRIVE_ENCODER_PORT_1, DRIVE_ENCODER_PORT_2);9 nik
         //driveEncoder.setReverseDirection(false);
         //driveEncoder.setDistancePerPulse(DRIVE_DISTANCE_PER_PULSE);
         
-        gear_auto_pos = 3;
+        gear_auto_pos = 2;
         
         turretTable = NetworkTable.getTable("GRIP/811Contour");
         gearTable = NetworkTable.getTable("GRIP/811GearContours");

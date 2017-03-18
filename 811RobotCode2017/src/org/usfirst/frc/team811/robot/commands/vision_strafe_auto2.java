@@ -54,9 +54,9 @@ public class vision_strafe_auto2 extends Command {
 		
 		//-236 + .264x
 		
-		double P = SmartDashboard.getNumber("kP");
-		double I = SmartDashboard.getNumber("kI");
-		double D = SmartDashboard.getNumber("kD");
+		double P = SmartDashboard.getNumber("kP"); // 0.03
+		double I = SmartDashboard.getNumber("kI"); // 0.0
+		double D = SmartDashboard.getNumber("kD"); // 0.0
 		double F = SmartDashboard.getNumber("kF");
        
           //proportional rotation injected to counter error

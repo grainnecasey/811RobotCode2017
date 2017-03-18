@@ -46,6 +46,7 @@ public class Robot extends IterativeRobot implements Config {
 	public static LidarController lidarController;
 	
     Command autonomousCommand;
+    Command variableCommand;
     SendableChooser<Command> autoChooser;
     SendableChooser<Command> variableChooser;
     
@@ -93,17 +94,22 @@ public class Robot extends IterativeRobot implements Config {
         //variableChooser.addObject("Gear Middle", new vari_gear_middle());
         variableChooser.addObject("Gear Left", new vari_gear_left());
 
+        SmartDashboard.putBoolean("beta bot?", RobotMap.betaBot.get());
+        
         
         SmartDashboard.putData("Auto Mode Chooser", autoChooser);
         SmartDashboard.putData("Auto Variable Chooser", variableChooser);
         SmartDashboard.putNumber("manual center", 145);
+        
+        SmartDashboard.putNumber("gear_auto_pos", 2);
 
-        SmartDashboard.putNumber("gear choice", 2);
+       // SmartDashboard.putNumber("gear choice", 2);
         oi = new OI();
        
         
         RobotMap.drivebackright.setEncPosition(0);
         RobotMap.drivebackright.configEncoderCodesPerRev((int) 1);
+
     }
 	
 	/**
@@ -130,6 +136,7 @@ public class Robot extends IterativeRobot implements Config {
 	 */
     public void autonomousInit() {
         autonomousCommand = (Command) autoChooser.getSelected();
+        variableCommand = (Command) variableChooser.getSelected();
        //autonomousCommand.start();
         
 		/* String autoSelected = SmartDashboard.getString("Auto Selector", "Default");
@@ -143,9 +150,10 @@ public class Robot extends IterativeRobot implements Config {
 			break;
 		} */
         
-        RobotMap.gear_auto_pos = (int) SmartDashboard.getInt("gear choice");
+        RobotMap.gear_auto_pos = (int) SmartDashboard.getNumber("gear_auto_pos");
     	
     	// schedule the autonomous command (example)
+        //if (variableCommand != null) variableCommand.start();
         if (autonomousCommand != null) autonomousCommand.start();
         RobotMap.drivebackright.setEncPosition(0);
     }
@@ -165,6 +173,8 @@ public class Robot extends IterativeRobot implements Config {
         if (autonomousCommand != null) autonomousCommand.cancel();
         RobotMap.drivebackright.setEncPosition(0);
         
+        //SmartDashboard.putNumber("gear_auto_pos", 2);
+        RobotMap.gear_auto_pos = (int) SmartDashboard.getNumber("gear_auto_pos");
 
     }
 
@@ -179,7 +189,8 @@ public class Robot extends IterativeRobot implements Config {
         SmartDashboard.putNumber("gyro yaw value", RobotMap.ahrs.getYaw());
         SmartDashboard.putNumber("drive enc val", RobotMap.drivebackright.getEncPosition());
         SmartDashboard.putNumber("drive enc corrected dist", RobotMap.drivebackright.getEncPosition() / DRIVE_DISTANCE_PER_PULSE);
-        SmartDashboard.putNumber("gear auto pos", RobotMap.gear_auto_pos);
+        
+        //RobotMap.gear_auto_pos = (int)SmartDashboard.getNumber("gear_auto_pos_real");
 
 
     }

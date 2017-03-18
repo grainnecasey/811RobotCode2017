@@ -18,6 +18,7 @@ public class drive_auto extends Command implements Config {
 
 	double distance;
 	double distanceInInches;
+	double conversion = 53.2; 
 
 	public drive_auto(double inches) {
 		// Use requires() here to declare subsystem dependencies
@@ -25,6 +26,10 @@ public class drive_auto extends Command implements Config {
 		requires(Robot.drive);
 		distance = inches;
 		distanceInInches =  Math.PI * inches;
+		
+		if (RobotMap.betaBot.get()==false) {
+			conversion = 47.8;
+		}
 	}
 
 	// Called just before this Command runs the first time
@@ -36,6 +41,10 @@ public class drive_auto extends Command implements Config {
 		RobotMap.drivebackright.setEncPosition(0);
 		RobotMap.drivebackright.reverseSensor(false);
 		
+		//double p = SmartDashboard.getDouble("kP");
+		//double i = SmartDashboard.getDouble("kI");
+		//double d = SmartDashboard.getDouble("kD");
+		
 		//RobotMap.driveEncoder.setReverseDirection(true);
 		//RobotMap.driveEncoder.setDistancePerPulse(1/40);
 		
@@ -43,7 +52,7 @@ public class drive_auto extends Command implements Config {
 		
 		//double encInches =  -1 * RobotMap.drivebackright.getEncPosition() / 47.8;
 		
-		RobotMap.drivePID = new PIDController(1, .6, 3, new PIDSource() {
+		RobotMap.drivePID = new PIDController(0.03, 0, 0, new PIDSource() {  //1, .6, 3
 			
 			public double pidGet()
 			{
@@ -69,7 +78,7 @@ public class drive_auto extends Command implements Config {
 		RobotMap.drivebackright.setEncPosition(0);
 		RobotMap.drivePID.setAbsoluteTolerance(1);
 		RobotMap.drivePID.setSetpoint(distance);
-		RobotMap.drivePID.setOutputRange(-.5, .5);
+		RobotMap.drivePID.setOutputRange(-.7, .7);
 		RobotMap.drivePID.setContinuous(true);
 		RobotMap.drivePID.enable();
 
