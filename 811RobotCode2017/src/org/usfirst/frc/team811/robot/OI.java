@@ -64,6 +64,7 @@ public class OI  implements Config{
 		SmartDashboard.putData("climb_up", new climb_joy_control());
 		SmartDashboard.putData("gear_down", new gear_down());
 		SmartDashboard.putData("gear_up", new gear_up());
+		SmartDashboard.putData("gear_place", new gear_place());
 		SmartDashboard.putData("intake_backspin", new intake_backspin());
 		SmartDashboard.putData("intake_off", new intake_off());
 		SmartDashboard.putData("intake_on", new intake_on());
@@ -73,6 +74,9 @@ public class OI  implements Config{
 		SmartDashboard.putData("shoot_load", new shoot_load());
 		SmartDashboard.putData("lidar_start", new lidar_start());
 		SmartDashboard.putData("lidar_stop", new lidar_stop());
+		SmartDashboard.putData("gearIn", new gearIn());
+		SmartDashboard.putData("gearOut", new gearOut());
+		SmartDashboard.putData("potReset", new potReset());
 		
 		//auto
 		SmartDashboard.putData("auto_base", new auto_base());
@@ -90,6 +94,8 @@ public class OI  implements Config{
 		SmartDashboard.putData("strafe_auto(24", new strafe_auto(12));
 		
 		SmartDashboard.putData("vision strafe auto 2", new vision_strafe_auto2());
+		
+		
 
 	}
     

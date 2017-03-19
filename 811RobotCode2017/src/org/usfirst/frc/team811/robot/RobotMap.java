@@ -43,8 +43,8 @@ public class RobotMap implements Config {
     
     public static Victor agitator;
     
-    public static CANTalon gearIntake;
-    public static Victor gearGrabber;
+    public static Victor gearIntake;
+    public static CANTalon gearGrabber;
     
     public static Victor turretLoader;
     
@@ -88,8 +88,12 @@ public class RobotMap implements Config {
         //turret = new CANTalon(TURRET_PORT);
         //turret.setFeedbackDevice(FeedbackDevice.AnalogPot);
         intakeBall = new CANTalon(INTAKE_BALL_PORT);
-        gearGrabber = new Victor(GEAR_GRABBER_PORT);
-        gearIntake = new CANTalon(GEAR_INTAKE_PORT);
+        gearGrabber = new CANTalon(GEAR_GRABBER_PORT);
+        gearGrabber.setFeedbackDevice(FeedbackDevice.AnalogPot);
+        gearGrabber.setForwardSoftLimit(GEAR_UP_ANGLE);
+        gearGrabber.setReverseSoftLimit(GEAR_DOWN_ANGLE);
+        gearGrabber.setAllowableClosedLoopErr(3);
+        gearIntake = new Victor(GEAR_INTAKE_PORT);
         gearTopLimit = new DigitalInput(GEAR_TOP_LIMIT_PORT);
         gearBottomLimit = new DigitalInput(GEAR_BOTTOM_LIMIT_PORT);
         shootertalon1 = new CANTalon(RIGHT_SHOOTER_PORT);

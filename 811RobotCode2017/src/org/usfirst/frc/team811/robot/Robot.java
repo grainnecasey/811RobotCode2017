@@ -175,6 +175,7 @@ public class Robot extends IterativeRobot implements Config {
         
         //SmartDashboard.putNumber("gear_auto_pos", 2);
         RobotMap.gear_auto_pos = (int) SmartDashboard.getNumber("gear_auto_pos");
+        //RobotMap.gearGrabber.setAnalogPosition(0);
 
     }
 
@@ -189,7 +190,9 @@ public class Robot extends IterativeRobot implements Config {
         SmartDashboard.putNumber("gyro yaw value", RobotMap.ahrs.getYaw());
         SmartDashboard.putNumber("drive enc val", RobotMap.drivebackright.getEncPosition());
         SmartDashboard.putNumber("drive enc corrected dist", RobotMap.drivebackright.getEncPosition() / DRIVE_DISTANCE_PER_PULSE);
-        
+        SmartDashboard.putNumber("gear pot Position val", RobotMap.gearGrabber.getPosition());
+        SmartDashboard.putBoolean("gear is alive", RobotMap.gearGrabber.isAlive());
+        SmartDashboard.putNumber("gear pot get", RobotMap.gearGrabber.get());
         //RobotMap.gear_auto_pos = (int)SmartDashboard.getNumber("gear_auto_pos_real");
 
 

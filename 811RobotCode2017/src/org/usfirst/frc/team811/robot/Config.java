@@ -18,7 +18,7 @@ public interface Config {
     int CLIMBER_PORT = 5;
     
     //Other Ports
-    int GEAR_INTAKE_PORT = 9;
+    int GEAR_INTAKE_PORT = 3;
     int GEAR_GRABBER_PORT = 9;
     int LOADER_RELAY_PORT = 0;
     int GEAR_TOP_LIMIT_PORT = 2;
@@ -54,6 +54,10 @@ public interface Config {
 	int GEAR_GRABBER_DOWN_BUTTON = 3;
 	double GEAR_GRAB_SPEED = .7;
 	double GEAR_INTAKE_SPEED = 1;
+	
+	double GEAR_UP_ANGLE = 410; //TODO
+	double GEAR_DOWN_ANGLE = -43; //TODO
+	double GEAR_PLACE_ANGLE = 300; //TODO
 	
     // Shooter/Turret Controls
     int SHOOTER_BUTTON = 6;

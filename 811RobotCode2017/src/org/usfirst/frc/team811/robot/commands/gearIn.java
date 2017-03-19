@@ -27,18 +27,18 @@ public class gearIn extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return isTimedOut();
+        return false;
         //maybe limit switch??
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	//Robot.geargrabber.gearInStop();
+    	Robot.geargrabber.gearInStop();
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	//Robot.geargrabber.gearInStop();
+    	Robot.geargrabber.gearInStop();
     }
 }

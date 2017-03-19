@@ -11,29 +11,28 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class gear_down extends Command implements Config{
+public class gear_place extends Command implements Config{
 
-    public gear_down() {
+    public gear_place() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	requires(Robot.geargrabber);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	RobotMap.gearGrabber.setPID(1.0, 0.0, 0.0); //numbers are temporary
+    	RobotMap.gearGrabber.setPID(2.0, 0.001, 0.0); //numbers are temporary
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	RobotMap.gearGrabber.changeControlMode(TalonControlMode.Position);
     	
-    	RobotMap.gearGrabber.set(GEAR_DOWN_ANGLE);
+    	RobotMap.gearGrabber.set(GEAR_PLACE_ANGLE);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	return false; //TODO
+    	return false; //Math.abs(RobotMap.gearGrabber.getClosedLoopError()) < 3; //TODO
     }
 
     // Called once after isFinished returns true
